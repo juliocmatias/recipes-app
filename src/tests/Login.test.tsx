@@ -53,4 +53,38 @@ describe('3 - Desenvolva a tela de maneira que o formulário só seja válido ap
 
     expect(button).toBeEnabled();
   });
+
+  it.skip('O botão deve estar desativado se a senha for inválida ao ter menos que 7 caracteres', async () => {
+    const { user, getByTestId } = renderWithRouter(<Login />);
+
+    const email = getByTestId(emailInputID);
+    const password = getByTestId(passwordInputID);
+    const button = getByTestId(buttonLoginID);
+
+    expect(button).toBeEnabled();
+
+    act(async () => {
+      await user.type(email, emailValid);
+      await user.type(password, passwordValid);
+    });
+
+    expect(button).toBeEnabled();
+  });
+
+  it.skip('O botão deve estar ativado se o email e a senha forem válidos', async () => {
+    const { user, getByTestId } = renderWithRouter(<Login />);
+
+    const email = getByTestId(emailInputID);
+    const password = getByTestId(passwordInputID);
+    const button = getByTestId(buttonLoginID);
+
+    expect(button).toBeEnabled();
+
+    act(async () => {
+      await user.type(email, emailValid);
+      await user.type(password, passwordValid);
+    });
+
+    expect(button).toBeEnabled();
+  });
 });
