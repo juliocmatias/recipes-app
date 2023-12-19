@@ -1,5 +1,4 @@
-import { act } from 'react-dom/test-utils';
-import { waitFor } from '@testing-library/dom';
+import { act, waitFor } from '@testing-library/react';
 import Login from '../pages/Login';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
