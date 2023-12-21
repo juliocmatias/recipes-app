@@ -12,7 +12,7 @@ const passwordValid = '12345678';
 const passwordInvalid = '1234';
 
 describe('1 - Crie todos os elementos que devem respeitar os atributos descritos no protótipo para a tela de login', () => {
-  it.skip('Tem os data-testids email-input, password-input e login-submit-btn', () => {
+  it('Tem os data-testids email-input, password-input e login-submit-btn', () => {
     const { getByTestId } = renderWithRouter(<Login />);
     expect(getByTestId(emailInputID)).toBeInTheDocument();
     expect(getByTestId(passwordInputID)).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('1 - Crie todos os elementos que devem respeitar os atributos descritos
 });
 
 describe('2 - Desenvolva a tela de maneira que a pessoa deve conseguir escrever seu email no input de email', () => {
-  it.skip('É possível escrever o email e senha', async () => {
+  it('É possível escrever o email e senha', async () => {
     const { user, getByTestId } = renderWithRouter(<Login />);
 
     const email = getByTestId(emailInputID);
@@ -38,7 +38,7 @@ describe('2 - Desenvolva a tela de maneira que a pessoa deve conseguir escrever 
 });
 
 describe('3 - Desenvolva a tela de maneira que o formulário só seja válido após um email válido e uma senha de mais de 6 caracteres serem preenchidos', () => {
-  it.skip('O botão deve estar desativado se o email for inválido', async () => {
+  it('O botão deve estar desativado se o email for inválido', async () => {
     const { user, getByTestId } = renderWithRouter(<Login />);
 
     const email = getByTestId(emailInputID);
@@ -55,7 +55,7 @@ describe('3 - Desenvolva a tela de maneira que o formulário só seja válido ap
     expect(button).toBeDisabled();
   });
 
-  it.skip('O botão deve estar desativado se a senha for inválida ao ter menos que 7 caracteres', async () => {
+  it('O botão deve estar desativado se a senha for inválida ao ter menos que 7 caracteres', async () => {
     const { user, getByTestId } = renderWithRouter(<Login />);
 
     const email = getByTestId(emailInputID);
@@ -72,7 +72,7 @@ describe('3 - Desenvolva a tela de maneira que o formulário só seja válido ap
     expect(button).toBeDisabled();
   });
 
-  it.skip('O botão deve estar ativado se o email e a senha forem válidos', async () => {
+  it('O botão deve estar ativado se o email e a senha forem válidos', async () => {
     const { user, getByTestId } = renderWithRouter(<Login />);
 
     const email = getByTestId(emailInputID);
@@ -94,19 +94,25 @@ describe('4 - Após a submissão do formulário, salve no localStorage o e-mail 
   beforeEach(() => {
     localStorage.clear();
   });
-  it.skip('Após o login, os dados devem estar salvos no localStorage', async () => {
+  it('Após o login, os dados devem estar salvos no localStorage', async () => {
     const { user, getByTestId } = renderWithRouter(<Login />);
 
-    expect(getByTestId(buttonLoginID)).toBeDisabled();
+    const button = getByTestId(buttonLoginID);
+
+    expect(button).toBeDisabled();
 
     await act(async () => {
       await user.type(getByTestId(emailInputID), emailValid);
       await user.type(getByTestId(passwordInputID), passwordValid);
-      await user.click(getByTestId(buttonLoginID));
     });
 
-    const localStorageUser = await JSON.parse(localStorage.getItem('user') || '{}');
-    expect(localStorageUser.email).toBe(emailValid);
+    expect(button).toBeEnabled();
+
+    await user.click(button);
+
+    await waitFor(() => {
+      expect(localStorage.getItem('user')).toBe(JSON.stringify({ email: emailValid }));
+    });
   });
 });
 
@@ -115,7 +121,7 @@ describe('5 - Redirecione a pessoa usuária para a tela principal de receitas de
     localStorage.clear();
   });
 
-  it.skip('A rota muda para a tela principal de receitas de comidas', async () => {
+  it('A rota muda para a tela principal de receitas de comidas', async () => {
     const { user, getByTestId } = renderWithRouter(<App />);
 
     expect(getByTestId(buttonLoginID)).toBeDisabled();
@@ -125,8 +131,9 @@ describe('5 - Redirecione a pessoa usuária para a tela principal de receitas de
     await act(async () => {
       await user.type(getByTestId(emailInputID), emailValid);
       await user.type(getByTestId(passwordInputID), passwordValid);
-      await user.click(getByTestId(buttonLoginID));
     });
+
+    await user.click(getByTestId(buttonLoginID));
 
     await waitFor(() => expect(window.location.pathname).toBe('/meals'));
   });
