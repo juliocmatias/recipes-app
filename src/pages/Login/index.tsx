@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo-recipes-app.svg';
 import tomate from '../../images/tomate.svg';
 import styles from './Login.module.css';
+import { putLocalStorage } from '../../utils/locaStorage';
 
 function Login() {
   const [userEmail, setUserEmail] = useState('');
@@ -26,7 +27,7 @@ function Login() {
     event.preventDefault();
     navigate('/meals');
 
-    localStorage.setItem('user', JSON.stringify({ email: userEmail }));
+    putLocalStorage('user', { email: userEmail });
   };
 
   return (
