@@ -39,7 +39,7 @@ function Login() {
         className={ styles.container_form }
         onSubmit={ (event) => handleSubmit(event) }
       >
-        <h1>Login</h1>
+        <h1 className={ styles.login_title }>Login</h1>
         <input
           placeholder="Email"
           className={ styles.input_login }
