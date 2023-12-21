@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../images/logo-recipes-app.svg';
 import tomate from '../../images/tomate.svg';
+import styles from './Login.module.css';
 
 function Login() {
   const [userEmail, setUserEmail] = useState('');
@@ -30,25 +31,25 @@ function Login() {
 
   return (
     <div>
-      <div>
-        <img src={ logo } alt="logo" />
-        <img src={ tomate } alt="tomate" />
+      <div className={ styles.container_img }>
+        <img className={ styles.logo } src={ logo } alt="logo" />
+        <img className={ styles.tomate } src={ tomate } alt="tomate" />
       </div>
       <form
-        // className={ styles.container_form }
+        className={ styles.container_form }
         onSubmit={ (event) => handleSubmit(event) }
       >
         <h1>Login</h1>
         <input
           placeholder="Email"
-          // className={ styles.input_login }
+          className={ styles.input_login }
           type="email"
           data-testid="email-input"
           value={ userEmail }
           onChange={ (event) => setUserEmail(event.target.value) }
         />
         <input
-          // className={ styles.input_login }
+          className={ styles.input_login }
           placeholder="Password"
           type="password"
           data-testid="password-input"
@@ -56,7 +57,7 @@ function Login() {
           onChange={ (event) => setUserPassword(event.target.value) }
         />
         <button
-          // className={ styles.button_enter }
+          className={ styles.button_enter }
           data-testid="login-submit-btn"
           disabled={ checkValues }
           type="submit"
