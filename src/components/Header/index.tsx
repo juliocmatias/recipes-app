@@ -5,7 +5,7 @@ import profile from '../../images/icone-perfil.svg';
 import search from '../../images/icone-pesquisa.svg';
 import appName from '../../images/logo-name-app.svg';
 import logo from '../../images/icone-recipes-app.svg';
-// import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../SearchBar';
 
 type HeaderProps = {
   namePage: string,
@@ -67,8 +67,8 @@ function Header({ namePage, pageIcon }: HeaderProps) {
             {namePage}
           </h1>
         </div>
-        {/* { showSearch
-      && <SearchBar />} */}
+        { showSearch
+      && <SearchBar />}
       </div>
     </header>
   );

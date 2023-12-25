@@ -1,6 +1,9 @@
 import { useContext, useState } from 'react';
-// import searchBarContext from '../../contex/SearchBarContex';
+import { useNavigate } from 'react-router-dom';
 import styles from './SearchBar.module.css';
+import { RecipesType, TypeSearch } from '../../types';
+import filterFetch from '../../utils/filterFetch';
+import RecipesContext from '../../context/RecipesContext';
 
 const INICIAL_VALUE = {
   infoInput: '',
@@ -8,17 +11,41 @@ const INICIAL_VALUE = {
 };
 
 function SearchBar() {
-  const { filterApi } = useContext(searchBarContext);
-  const [searchInput, setSearchInput] = useState(INICIAL_VALUE);
+  // pega o pathname da pagina atual
+  const path = window.location.pathname.split('/')[1];
+  const navigate = useNavigate();
+
+  const { setLoading, setRecipes } = useContext(RecipesContext);
+
+  // const { filterApi } = useContext(searchBarContext);
+  const [searchForm, setSearchForm] = useState(INICIAL_VALUE);
 
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
-    setSearchInput({ ...searchInput, [name]: value });
+    setSearchForm({ ...searchForm, [name]: value });
   };
 
-  const handleClick = () => {
-    filterApi(searchInput);
-    setSearchInput(INICIAL_VALUE);
+  const handleClick = async () => {
+    if (searchForm.infoInput === '') {
+      return alert('Your search must contain only 1 (one) character');
+    }
+    setLoading(true);
+    const dataResponse: RecipesType = await filterFetch(
+      path,
+      searchForm.radio as TypeSearch,
+
+      searchForm.infoInput,
+    );
+
+    setRecipes(dataResponse);
+    setLoading(false);
+    setSearchForm(INICIAL_VALUE);
+    if (dataResponse.meals?.length === 1) {
+      navigate(`/${path}/${dataResponse.meals[0].idMeal}`);
+    }
+    if (dataResponse.drinks?.length === 1) {
+      navigate(`/${path}/${dataResponse.drinks[0].idDrink}`);
+    }
   };
   // colocando valores iniciais para o radio
   // colocando na chave radio o valor 'ingredient';
@@ -32,7 +59,7 @@ function SearchBar() {
           className={ styles.input_search }
           onChange={ handleChange }
           name="infoInput"
-          value={ searchInput.infoInput }
+          value={ searchForm.infoInput }
           data-testid="search-input"
           type="text"
         />
@@ -45,7 +72,7 @@ function SearchBar() {
             type="radio"
             name="radio"
             value="ingredient"
-            checked={ searchInput.radio === 'ingredient' }
+            checked={ searchForm.radio === 'ingredient' }
             data-testid="ingredient-search-radio"
           />
           Ingredient
@@ -54,7 +81,7 @@ function SearchBar() {
             name="radio"
             value="name"
             type="radio"
-            checked={ searchInput.radio === 'name' }
+            checked={ searchForm.radio === 'name' }
             data-testid="name-search-radio"
           />
           Name
@@ -63,7 +90,7 @@ function SearchBar() {
             name="radio"
             value="first-letter"
             type="radio"
-            checked={ searchInput.radio === 'first-letter' }
+            checked={ searchForm.radio === 'first-letter' }
             data-testid="first-letter-search-radio"
           />
           First Letter

@@ -14,3 +14,20 @@ export type RecipeLocalStorageType = {
 export type UserLocalStorageType = {
   email: string;
 };
+
+export type TypeSearch = 'ingredient'
+| 'name' | 'first-letter' | 'recommendation' | 'category' | 'details';
+
+export type RecipesType = {
+  meals:
+  {
+    strMeal: string;
+    strMealThumb: string;
+    idMeal: string;
+  }[];
+  drinks: {
+    strDrink: string;
+    strDrinkThumb: string;
+    idDrink: string;
+  }[];
+};
