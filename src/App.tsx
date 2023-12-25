@@ -14,7 +14,7 @@ import mealsIcon from './images/meal-icon.svg';
 import drinkIcon from './images/drink-icon.svg';
 import doneRecipeIcon from './images/doneRecipeIcon.svg';
 import favoriteIcon from './images/favoriteRecipeIcon.svg';
-import profileIcon from './images/profileIcon.svg';
+import profileIcon from './images/icone-perfil.svg';
 
 function App() {
   return (
@@ -55,7 +55,7 @@ function App() {
       <Route
         path="/favorite-recipes"
         element={
-          <Layout namePage="Favorites" pageIcon={ favoriteIcon } />
+          <Layout namePage="Favorite Recipes" pageIcon={ favoriteIcon } />
 }
       >
         <Route index element={ <FavoriteRecipes /> } />

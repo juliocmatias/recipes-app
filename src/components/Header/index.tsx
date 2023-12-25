@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Header.module.css';
-import profile from '../../images/icone-perfil.svg';
-import search from '../../images/icone-pesquisa.svg';
+import profile from '../../images/profileIcon.svg';
+import search from '../../images/searchIcon.svg';
 import appName from '../../images/logo-name-app.svg';
 import logo from '../../images/icone-recipes-app.svg';
 import SearchBar from '../SearchBar';
