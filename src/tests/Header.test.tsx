@@ -3,20 +3,23 @@ import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 
 const buttonSearchID = 'search-top-btn';
+const buttonProfileID = 'profile-top-btn';
+const inputSearchID = 'search-input';
+const pageTitleID = 'page-title';
 
 describe('6 - Implemente o header de acordo com a necessidade de cada tela', () => {
   const hasNoHeader = () => {
-    expect(screen.queryByTestId('profile-top-btn')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('page-title')).not.toBeInTheDocument();
+    expect(screen.queryByTestId(buttonProfileID)).not.toBeInTheDocument();
+    expect(screen.queryByTestId(pageTitleID)).not.toBeInTheDocument();
     expect(screen.queryByTestId(buttonSearchID)).not.toBeInTheDocument();
   };
 
   const hasHeader = (title: string, withSearchButton = true) => {
-    const profileButton = screen.getByTestId('profile-top-btn');
+    const profileButton = screen.getByTestId(buttonProfileID);
 
     expect(profileButton.getAttribute('src')).toContain('profileIcon');
 
-    expect(screen.getByTestId('page-title')).toHaveTextContent(title);
+    expect(screen.getByTestId(pageTitleID)).toHaveTextContent(title);
 
     if (withSearchButton) {
       const searchButton = screen.getByTestId(buttonSearchID);
@@ -77,5 +80,61 @@ describe('6 - Implemente o header de acordo com a necessidade de cada tela', () 
   it('Rota "/favorite-recipes": possui o header com o título "Favorite Recipes" e o ícone de perfil, mas sem o ícone de pesquisa', () => {
     renderWithRouter(<App />, { route: '/favorite-recipes' });
     hasHeader('Favorite Recipes', false);
+  });
+});
+
+describe('7 - Redirecione a pessoa usuária para a tela de perfil ao clicar no botão de perfil', () => {
+  it('A mudança de tela ocorre corretamente', async () => {
+    const { user } = renderWithRouter(<App />, { route: '/meals' });
+
+    expect(screen.getByTestId(pageTitleID)).toHaveTextContent('Meals');
+
+    const profileButton = screen.getByTestId(buttonProfileID);
+    await act(async () => {
+      await user.click(profileButton);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId(pageTitleID)).toHaveTextContent('Profile');
+    });
+  });
+});
+
+describe('8 - Desenvolva o botão de busca que, ao ser clicado, a barra de busca deve aparecer. O mesmo serve para escondê-la', () => {
+  it('Ao clicar no botão de busca, a barra de busca deve aparecer', async () => {
+    const { user } = renderWithRouter(<App />, { route: '/meals' });
+
+    expect(screen.queryByTestId(inputSearchID)).not.toBeInTheDocument();
+
+    const searchButton = screen.getByTestId(buttonSearchID);
+    await act(async () => {
+      await user.click(searchButton);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId(inputSearchID)).toBeInTheDocument();
+    });
+  });
+
+  it('Ao clicar no botão de busca novamente, a barra de busca deve sumir', async () => {
+    const { user } = renderWithRouter(<App />, { route: '/meals' });
+
+    const searchButton = screen.getByTestId(buttonSearchID);
+
+    await act(async () => {
+      await user.click(searchButton);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByTestId(inputSearchID)).toBeInTheDocument();
+    });
+
+    await act(async () => {
+      await user.click(searchButton);
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByTestId(inputSearchID)).not.toBeInTheDocument();
+    });
   });
 });

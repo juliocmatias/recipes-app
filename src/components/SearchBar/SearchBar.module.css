@@ -11,14 +11,14 @@
 }
 
 h1 {
-  color: #41197f;
+  color: #19a48d;
   text-align: center;
   text-transform: uppercase;
 }
 
 .container_radio {
   align-items: center;
-  background-color: #41197f;
+  background-color: #19a48d;
   border-radius: 10px;
   color: white;
   display: flex;
@@ -32,7 +32,7 @@ h1 {
 }
 
 .button_search {
-  background-color: #fcc436;
+  background-color: black;
   border-radius: 5px;
   color: white;
   height: 25px;
