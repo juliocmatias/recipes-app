@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from 'react';
 import styles from './Header.module.css';
 import profile from '../../images/profileIcon.svg';
 import search from '../../images/searchIcon.svg';
 import appName from '../../images/logo-name-app.svg';
 import logo from '../../images/icone-recipes-app.svg';
 import SearchBar from '../SearchBar';
+import RecipesContext from '../../context/RecipesContext';
 
 type HeaderProps = {
   namePage: string,
@@ -13,11 +14,17 @@ type HeaderProps = {
 };
 
 function Header({ namePage, pageIcon }: HeaderProps) {
-  const [showSearch, setShowSearch] = useState(false);
+  // const [showSearch, setShowSearch] = useState(false);
+  const { showSearch, setShowSearch } = useContext(RecipesContext);
   const navigate = useNavigate();
 
   const handleSearch = () => {
     setShowSearch(!showSearch);
+  };
+
+  const handleProfile = () => {
+    setShowSearch(false);
+    navigate('/profile');
   };
 
   return (
@@ -46,7 +53,7 @@ function Header({ namePage, pageIcon }: HeaderProps) {
     />
   </button>
 )}
-          <button onClick={ () => navigate('/profile') }>
+          <button onClick={ handleProfile }>
             <img src={ profile } alt="profile" data-testid="profile-top-btn" />
           </button>
         </div>

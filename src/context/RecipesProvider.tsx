@@ -9,12 +9,15 @@ type UserProviderProps = {
 export default function RecipesProvider({ children }: UserProviderProps) {
   const [loading, setLoading] = useState(false);
   const [recipes, setRecipes] = useState<RecipesType>({ meals: [], drinks: [] });
+  const [showSearch, setShowSearch] = useState(false);
 
   const context = {
     loading,
     setLoading,
     recipes,
     setRecipes,
+    showSearch,
+    setShowSearch,
   };
   return (
     <UserContext.Provider value={ context }>
