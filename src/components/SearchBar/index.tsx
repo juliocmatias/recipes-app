@@ -37,13 +37,13 @@ function SearchBar() {
       searchForm.infoInput,
     );
 
-    setRecipes(dataResponse);
+    setRecipes((prevState) => ({ ...prevState, ...dataResponse }));
     setLoading(false);
     setSearchForm(INICIAL_VALUE);
-    if (dataResponse.meals?.length === 1) {
+    if (dataResponse && dataResponse.meals?.length === 1) {
       navigate(`/${path}/${dataResponse.meals[0].idMeal}`);
     }
-    if (dataResponse.drinks?.length === 1) {
+    if (dataResponse && dataResponse.drinks?.length === 1) {
       navigate(`/${path}/${dataResponse.drinks[0].idDrink}`);
     }
   };
