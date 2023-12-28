@@ -1,17 +1,25 @@
-import { mockDrinksFirstLetter } from './mockDrinks/mockDrinksFirstLetter';
-import { mockDrinksIngredients } from './mockDrinks/mockDrinksIngredients';
-import { mockDrinksName } from './mockDrinks/mockDrinksName';
-import { mockMealsFirstLetter } from './mockMeals/mockMealsFirstLetter';
-import { mockMealsIngredients } from './mockMeals/mockMealsIngredients';
-import { mockMealsName } from './mockMeals/mockMealsName';
+import { drinksNotFound } from './mockDrinks/drinksNotFound';
+import { oneDrinkFoundAquamarine } from './mockDrinks/oneDrinkFoundAquamarine';
+import { drinksFirstLetter } from './mockDrinks/drinksFirstLetter';
+import { drinksIngredients } from './mockDrinks/drinksIngredients';
+import { drinksName } from './mockDrinks/drinksName';
+import { oneMealFoundArrabiata } from './mockMeals/oneMealFoundArrabiata';
+import { mealsFirstLetter } from './mockMeals/mealsFirstLetter';
+import { mealsIngredients } from './mockMeals/mealsIngredients';
+import { mealsName } from './mockMeals/mealsName';
+import { mealsNotFound } from './mockMeals/mealsNotFound';
 
 const POSSIBLE_RESPONSES: any = {
-  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=lemon': mockDrinksIngredients,
-  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=gin': mockDrinksName,
-  'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a': mockDrinksFirstLetter,
-  'https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken': mockMealsIngredients,
-  'https://www.themealdb.com/api/json/v1/1/search.php?s=soup': mockMealsName,
-  'https://www.themealdb.com/api/json/v1/1/search.php?f=a': mockMealsFirstLetter,
+  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=lemon': drinksIngredients,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=gin': drinksName,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a': drinksFirstLetter,
+  'https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken': mealsIngredients,
+  'https://www.themealdb.com/api/json/v1/1/search.php?s=soup': mealsName,
+  'https://www.themealdb.com/api/json/v1/1/search.php?f=a': mealsFirstLetter,
+  'https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata': oneMealFoundArrabiata,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=Aquamarine': oneDrinkFoundAquamarine,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=xablau': drinksNotFound,
+  'https://www.themealdb.com/api/json/v1/1/search.php?s=xablau': mealsNotFound,
 };
 
 export const fetchMock = async (url: string) => Promise.resolve({

@@ -1,4 +1,4 @@
-export const mockDrinksFirstLetter = {
+export const drinksFirstLetter = {
   drinks: [
     {
       idDrink: '17222',

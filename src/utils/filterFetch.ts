@@ -21,7 +21,6 @@ export default async function filterFetch(
       case 'first-letter':
         return fetchFirstLetter(namePage, value);
       default:
-        break;
     }
   }
 }

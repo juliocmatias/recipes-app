@@ -43,3 +43,32 @@ export type RecipesType = {
     containsAlcoholic?: boolean;
   }[];
 };
+
+export type RecipesMealsType = {
+  meals:
+  {
+    strMeal: string;
+    strMealThumb: string;
+    idMeal: string;
+    strCategory?: string;
+    strInstructions?: string;
+    ingredients?: string[];
+    strArea?: string;
+    strYoutube?: string;
+  }[]
+};
+
+export type RecipesDrinksType = {
+  drinks: {
+    strDrink: string;
+    strDrinkThumb: string;
+    idDrink: string;
+    strCategory?: string;
+    strInstructions?: string;
+    ingredients?: string[];
+    strArea?: string;
+    strYoutube?: string;
+    strAlcoholic?: string;
+    containsAlcoholic?: boolean;
+  }[]
+};

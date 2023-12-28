@@ -1,4 +1,4 @@
-export const mockDrinksIngredients = {
+export const drinksIngredients = {
   drinks: [
     {
       strDrink: 'A True Amaretto Sour',

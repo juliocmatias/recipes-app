@@ -1,4 +1,4 @@
-export const mockMealsIngredients = {
+export const mealsIngredients = {
   meals: [
     {
       strMeal: 'Brown Stew Chicken',

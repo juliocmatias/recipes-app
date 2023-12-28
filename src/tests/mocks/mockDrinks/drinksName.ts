@@ -1,6 +1,6 @@
 const ordinaryDrink = 'Ordinary Drink';
 
-export const mockDrinksName = {
+export const drinksName = {
   drinks: [
     {
       idDrink: '11410',

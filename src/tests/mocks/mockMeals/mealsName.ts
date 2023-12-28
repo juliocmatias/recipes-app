@@ -1,4 +1,4 @@
-export const mockMealsName = {
+export const mealsName = {
   meals: [
     {
       idMeal: '52973',
