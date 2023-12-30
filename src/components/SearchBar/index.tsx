@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SearchBar.module.css';
-import { RecipesType, TypeSearch } from '../../types';
+import { DrinksType, MealsType, SearchFormType, TypeSearch } from '../../types';
 import filterFetch from '../../utils/filterFetch';
 import RecipesContext from '../../context/RecipesContext';
 
@@ -15,10 +15,23 @@ function SearchBar() {
   const path = window.location.pathname.split('/')[1];
   const navigate = useNavigate();
 
-  const { setLoading, setRecipes, recipes } = useContext(RecipesContext);
+  const { setLoading, setDrinks, setMeals, meals, drinks } = useContext(RecipesContext);
 
-  // const { filterApi } = useContext(searchBarContext);
-  const [searchForm, setSearchForm] = useState(INICIAL_VALUE);
+  const [searchForm, setSearchForm] = useState<SearchFormType>(INICIAL_VALUE);
+
+  useEffect(() => {
+    const handleNavigate = () => {
+      const verifyOneRecipe = meals.length === 1 || drinks.length === 1;
+      if (verifyOneRecipe) {
+        if (path === 'meals') {
+          navigate(`/${path}/${meals[0].idMeal}`);
+        } else if (path === 'drinks') {
+          navigate(`/${path}/${drinks[0].idDrink}`);
+        }
+      }
+    };
+    handleNavigate();
+  }, [meals, drinks, path, navigate]);
 
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
@@ -30,29 +43,35 @@ function SearchBar() {
       return alert('Your search must contain only 1 (one) character');
     }
     setLoading(true);
-    const dataResponse: RecipesType = await filterFetch(
-      path,
-      searchForm.radio as TypeSearch,
+    if (path === 'meals') {
+      const newValueInfo = searchForm.infoInput;
+      const dataResponse = await filterFetch(
+        path,
+        searchForm.radio as TypeSearch,
 
-      searchForm.infoInput,
-    );
+        newValueInfo,
+      );
+      if (dataResponse) setMeals(dataResponse as MealsType);
+    } else if (path === 'drinks') {
+      const newValueInfo = searchForm.infoInput.toLowerCase();
+      const dataResponse = await filterFetch(
+        path,
+        searchForm.radio as TypeSearch,
 
-    setRecipes((prevState) => ({ ...prevState, ...dataResponse }));
+        newValueInfo,
+      );
+      if (dataResponse) setDrinks(dataResponse as DrinksType);
+    }
     setLoading(false);
     setSearchForm(INICIAL_VALUE);
-    // if (dataResponse && dataResponse.meals?.length === 1) {
-    //   navigate(`/${path}/${dataResponse.meals[0].idMeal}`);
-    // }
-    // if (dataResponse && dataResponse.drinks?.length === 1) {
-    //   navigate(`/${path}/${dataResponse.drinks[0].idDrink}`);
-    // }
   };
 
-  if ((recipes && recipes.meals.length === 1)
-  || (recipes && recipes.drinks.length === 1)) {
-    navigate(`/${path}/${path === 'meals'
-      ? recipes.meals[0].idMeal : recipes.drinks[0].idDrink}`);
-  }
+  // if (meals && meals.length === 1) {
+  //   navigate(`/${path}/${meals[0].idMeal}`);
+  // }
+  // if (drinks && drinks.length === 1) {
+  //   navigate(`/${path}/${drinks[0].idDrink}`);
+  // }
   // colocando valores iniciais para o radio
   // colocando na chave radio o valor 'ingredient';
   // assim quando o componente iniciar 'ingredient' vai estar selecionado.
@@ -65,6 +84,7 @@ function SearchBar() {
           className={ styles.input_search }
           onChange={ handleChange }
           name="infoInput"
+          maxLength={ 30 }
           value={ searchForm.infoInput }
           data-testid="search-input"
           type="text"

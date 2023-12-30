@@ -61,11 +61,11 @@ describe('10 - Implemente 3 radio buttons na barra de busca: Ingredient, Name e 
     });
 
     await act(async () => {
-      await user.type(screen.getByTestId(inputSearchID), 'Chicken');
+      await user.type(screen.getByTestId(inputSearchID), 'chicken');
       await user.click(screen.getByTestId(radioIngredientID));
     });
     await user.click(screen.getByTestId(exeButtonID));
-    expect(window.fetch).toHaveBeenCalledWith('https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken');
+    expect(window.fetch).toHaveBeenCalledWith('https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken');
   });
 
   it('Se o radio selecionado for Name, a busca na API é feita corretamente pelo nome', async () => {
@@ -319,9 +319,17 @@ describe('13 - Exiba um `alert` caso nenhuma receita seja encontrada', () => {
 
     await user.click(screen.getByTestId(exeButtonID));
     expect(window.alert).toHaveBeenCalledWith(alertNotFound);
+
+    await act(async () => {
+      await user.type(screen.getByTestId(inputSearchID), '.');
+      await user.click(screen.getByTestId(radioFirstLetterID));
+    });
+
+    await user.click(screen.getByTestId(exeButtonID));
+    expect(window.alert).toHaveBeenCalledWith(alertNotFound);
   });
 
-  it('Caso nenhuma bebida seja encontrada pelo nome, o alert deve ser exibido', async () => {
+  it('Caso nenhuma bebida seja encontrada o alert deve ser exibido', async () => {
     const { user } = renderWithRouter(
       <RecipesProvider>
         <App />
@@ -342,6 +350,20 @@ describe('13 - Exiba um `alert` caso nenhuma receita seja encontrada', () => {
     });
     await user.click(screen.getByTestId(exeButtonID));
     expect(window.alert).toBeCalled();
+    expect(window.alert).toHaveBeenCalledWith(alertNotFound);
+
+    await act(async () => {
+      await user.type(screen.getByTestId(inputSearchID), 'xablau');
+      await user.click(screen.getByTestId(radioIngredientID));
+    });
+    await user.click(screen.getByTestId(exeButtonID));
+    expect(window.alert).toHaveBeenCalledWith(alertNotFound);
+
+    await act(async () => {
+      await user.type(screen.getByTestId(inputSearchID), '.');
+      await user.click(screen.getByTestId(radioFirstLetterID));
+    });
+    await user.click(screen.getByTestId(exeButtonID));
     expect(window.alert).toHaveBeenCalledWith(alertNotFound);
   });
 });

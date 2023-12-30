@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import UserContext from './RecipesContext';
-import { RecipesType } from '../types';
+import { DrinksType, MealsType, RecipesType } from '../types';
 
 type UserProviderProps = {
   children: React.ReactNode
@@ -8,7 +8,9 @@ type UserProviderProps = {
 
 export default function RecipesProvider({ children }: UserProviderProps) {
   const [loading, setLoading] = useState(false);
-  const [recipes, setRecipes] = useState<RecipesType>({ meals: [], drinks: [] });
+  const [recipes, setRecipes] = useState<RecipesType>([]);
+  const [meals, setMeals] = useState<MealsType>([]);
+  const [drinks, setDrinks] = useState<DrinksType>([]);
   const [showSearch, setShowSearch] = useState(false);
 
   const context = {
@@ -16,6 +18,10 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     setLoading,
     recipes,
     setRecipes,
+    meals,
+    drinks,
+    setDrinks,
+    setMeals,
     showSearch,
     setShowSearch,
   };

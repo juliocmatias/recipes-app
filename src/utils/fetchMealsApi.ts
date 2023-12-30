@@ -1,10 +1,59 @@
+import { DataMealsType } from '../types';
+
+const alertError = "Sorry, we haven't found any recipes for these filters";
+const errorNull = 'meals key returned null';
 export const fetchMealsIngredient = async (ingredient: string) => {
   try {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
-    const data = response.json();
-    return await data;
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`,
+    );
+    const data: DataMealsType = await response.json();
+    if (data.meals === null) {
+      throw new Error(errorNull);
+    }
+    return data.meals;
   } catch (error) {
-    console.log('Erro busca por ingredientes', error);
+    console.log('Erro found when searching for Ingredient', error);
+    window.alert(alertError);
+    return null;
+  }
+};
+
+export const fetchMealsName = async (name: string) => {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`,
+    );
+    const data: DataMealsType = await response.json();
+    if (data.meals === null) {
+      throw new Error(errorNull);
+    }
+    return data.meals;
+  } catch (error) {
+    console.log('Erro found when searching for Name', error);
+    window.alert(alertError);
+    return null;
+  }
+};
+
+export const fetchMealsFirstLetter = async (firstLetter: string) => {
+  if (firstLetter.length > 1) {
+    window.alert('Your search must have only 1 (one) character');
+    return null;
+  }
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`,
+    );
+    const data: DataMealsType = await response.json();
+    if (data.meals === null) {
+      throw new Error(errorNull);
+    }
+    return data.meals;
+  } catch (error) {
+    console.log('Erro found when searching for FirstLetter', error);
+    window.alert(alertError);
+    return null;
   }
 };
 
@@ -15,26 +64,6 @@ export const fetchMealsRecommendation = async () => {
     return data;
   } catch (error) {
     console.log('Erro busca de recomendados', error);
-  }
-};
-
-export const fetchMealsName = async (name: string) => {
-  try {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
-    const data = response.json();
-    return await data;
-  } catch (error) {
-    console.log('Erro busca por name', error);
-  }
-};
-
-export const fetchMealsFirstLetter = async (firstLetter: string) => {
-  try {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`);
-    const data = response.json();
-    return await data;
-  } catch (error) {
-    console.log('Erro busca por first letter', error);
   }
 };
 

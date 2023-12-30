@@ -16,10 +16,14 @@ const POSSIBLE_RESPONSES: any = {
   'https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken': mealsIngredients,
   'https://www.themealdb.com/api/json/v1/1/search.php?s=soup': mealsName,
   'https://www.themealdb.com/api/json/v1/1/search.php?f=a': mealsFirstLetter,
-  'https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata': oneMealFoundArrabiata,
-  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=Aquamarine': oneDrinkFoundAquamarine,
+  'https://www.themealdb.com/api/json/v1/1/search.php?s=arrabiata': oneMealFoundArrabiata,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=aquamarine': oneDrinkFoundAquamarine,
   'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=xablau': drinksNotFound,
+  'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=xablau': drinksNotFound,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=.': drinksNotFound,
   'https://www.themealdb.com/api/json/v1/1/search.php?s=xablau': mealsNotFound,
+  'https://www.themealdb.com/api/json/v1/1/filter.php?i=xablau': mealsNotFound,
+  'https://www.themealdb.com/api/json/v1/1/search.php?f=.': mealsNotFound,
 };
 
 export const fetchMock = async (url: string) => Promise.resolve({

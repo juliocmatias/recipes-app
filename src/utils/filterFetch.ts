@@ -1,11 +1,8 @@
 import { TypeSearch } from '../types';
-import { fetchFirstLetter, fetchIngredient, fetchName } from './fetchApi';
-
-// type FilterFetchType = {
-//   value?: string;
-//   typeSearch: TypeSearch;
-//   namePage: string;
-// };
+import { fetchDrinksFirstLetter,
+  fetchDrinksIngredient, fetchDrinksName } from './fetchDrinksApi';
+import { fetchMealsFirstLetter,
+  fetchMealsIngredient, fetchMealsName } from './fetchMealsApi';
 
 export default async function filterFetch(
   namePage: string,
@@ -13,14 +10,25 @@ export default async function filterFetch(
   value?: string,
 ) {
   if (value) {
+    const valueCase = value.toLowerCase();
     switch (typeSearch) {
       case 'ingredient':
-        return fetchIngredient(namePage, value);
+        if (namePage === 'meals') {
+          return fetchMealsIngredient(valueCase);
+        }
+        return fetchDrinksIngredient(valueCase);
       case 'name':
-        return fetchName(namePage, value);
+        if (namePage === 'meals') {
+          return fetchMealsName(valueCase);
+        }
+        return fetchDrinksName(valueCase);
       case 'first-letter':
-        return fetchFirstLetter(namePage, value);
+        if (namePage === 'meals') {
+          return fetchMealsFirstLetter(valueCase);
+        }
+        return fetchDrinksFirstLetter(valueCase);
       default:
+        return null;
     }
   }
 }
