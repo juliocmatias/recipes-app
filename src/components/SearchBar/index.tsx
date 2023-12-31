@@ -44,34 +44,26 @@ function SearchBar() {
     }
     setLoading(true);
     if (path === 'meals') {
-      const newValueInfo = searchForm.infoInput;
       const dataResponse = await filterFetch(
         path,
         searchForm.radio as TypeSearch,
 
-        newValueInfo,
-      );
-      if (dataResponse) setMeals(dataResponse as MealsType);
+        searchForm.infoInput,
+      ) as MealsType;
+      if (dataResponse) setMeals(dataResponse);
     } else if (path === 'drinks') {
-      const newValueInfo = searchForm.infoInput.toLowerCase();
       const dataResponse = await filterFetch(
         path,
         searchForm.radio as TypeSearch,
 
-        newValueInfo,
-      );
-      if (dataResponse) setDrinks(dataResponse as DrinksType);
+        searchForm.infoInput,
+      ) as DrinksType;
+      if (dataResponse) setDrinks(dataResponse);
     }
     setLoading(false);
     setSearchForm(INICIAL_VALUE);
   };
 
-  // if (meals && meals.length === 1) {
-  //   navigate(`/${path}/${meals[0].idMeal}`);
-  // }
-  // if (drinks && drinks.length === 1) {
-  //   navigate(`/${path}/${drinks[0].idDrink}`);
-  // }
   // colocando valores iniciais para o radio
   // colocando na chave radio o valor 'ingredient';
   // assim quando o componente iniciar 'ingredient' vai estar selecionado.

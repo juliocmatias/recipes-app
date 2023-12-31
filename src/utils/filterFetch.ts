@@ -10,23 +10,22 @@ export default async function filterFetch(
   value?: string,
 ) {
   if (value) {
-    const valueCase = value.toLowerCase();
     switch (typeSearch) {
       case 'ingredient':
         if (namePage === 'meals') {
-          return fetchMealsIngredient(valueCase);
+          return fetchMealsIngredient(value);
         }
-        return fetchDrinksIngredient(valueCase);
+        return fetchDrinksIngredient(value);
       case 'name':
         if (namePage === 'meals') {
-          return fetchMealsName(valueCase);
+          return fetchMealsName(value);
         }
-        return fetchDrinksName(valueCase);
+        return fetchDrinksName(value);
       case 'first-letter':
         if (namePage === 'meals') {
-          return fetchMealsFirstLetter(valueCase);
+          return fetchMealsFirstLetter(value);
         }
-        return fetchDrinksFirstLetter(valueCase);
+        return fetchDrinksFirstLetter(value);
       default:
         return null;
     }
