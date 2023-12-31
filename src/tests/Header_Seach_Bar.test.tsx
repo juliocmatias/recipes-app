@@ -259,7 +259,7 @@ describe('12 - Redirecione para a tela de detalhes da receita caso apenas uma re
     await user.click(screen.getByTestId(radioNameID));
     await user.click(screen.getByTestId(exeButtonID));
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(window.location.pathname).toBe('/meals/52771');
     });
   });
@@ -278,7 +278,7 @@ describe('12 - Redirecione para a tela de detalhes da receita caso apenas uma re
     await user.click(screen.getByTestId(radioNameID));
     await user.click(screen.getByTestId(exeButtonID));
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(window.location.pathname).toBe('/drinks/178319');
     });
   });
