@@ -11,33 +11,32 @@ export type RecipeLocalStorageType = {
   doneDate?: string;
   tags?: string[];
 };
+
 export type UserLocalStorageType = {
   email: string;
 };
 
-export type TypeSearch = 'ingredient' | 'name' | 'first-letter' | 'default';
+export type TypeSearch = 'ingredient'
+| 'name'
+| 'first-letter'
+| 'recommendation'
+| 'default';
 
-export type RecipesType = {
-  strMeal?: string;
-  strMealThumb?: string;
-  idMeal?: string;
-  strCategory?: string;
-  strInstructions?: string;
-  ingredients?: string[];
-  strArea?: string;
-  strYoutube?: string;
-}[] | {
-  strDrink: string;
-  strDrinkThumb: string;
-  idDrink: string;
-  strCategory?: string;
-  strInstructions?: string;
-  ingredients?: string[];
-  strArea?: string;
-  strYoutube?: string;
-  strAlcoholic?: string;
-  containsAlcoholic?: boolean;
-}[];
+export type RecipeType = {
+  id: string;
+  type: 'meal' | 'drink';
+  nationality: string | '';
+  category: string | '';
+  alcoholicOrNot: 'alcoholic' | 'non-alcoholic' | '';
+  name: string;
+  image: string;
+  doneDate?: string;
+  tags?: string[];
+  instructions?: string;
+  ingredients?: string[]
+};
+
+export type RecipesType = RecipeType[];
 
 export type MealsType = {
   strMeal: string;
@@ -45,9 +44,11 @@ export type MealsType = {
   idMeal: string;
   strCategory?: string;
   strInstructions?: string;
-  ingredients?: string[];
   strArea?: string;
   strYoutube?: string;
+  strTags?: string;
+  dateModified?: string;
+  [key: string]: any;
 }[];
 
 export type DrinksType = {
@@ -56,11 +57,13 @@ export type DrinksType = {
   idDrink: string;
   strCategory?: string;
   strInstructions?: string;
-  ingredients?: string[];
   strArea?: string;
   strYoutube?: string;
   strAlcoholic?: string;
   containsAlcoholic?: boolean;
+  strTags?: string;
+  dateModified?: string;
+  [key: string]: any;
 }[];
 
 export type DataMealsType = {
@@ -71,9 +74,10 @@ export type DataMealsType = {
     idMeal: string;
     strCategory?: string;
     strInstructions?: string;
-    ingredients?: string[];
     strArea?: string;
     strYoutube?: string;
+    strTags?: string;
+    dateModified?: string;
   }[];
 };
 
@@ -84,11 +88,12 @@ export type DataDrinksType = {
     idDrink: string;
     strCategory?: string;
     strInstructions?: string;
-    ingredients?: string[];
     strArea?: string;
     strYoutube?: string;
     strAlcoholic?: string;
     containsAlcoholic?: boolean;
+    strTags?: string;
+    dateModified?: string;
   }[];
 };
 

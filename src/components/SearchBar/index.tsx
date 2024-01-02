@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SearchBar.module.css';
-import { DrinksType, MealsType, SearchFormType, TypeSearch } from '../../types';
+import { RecipesType, SearchFormType, TypeSearch } from '../../types';
 import filterFetch from '../../utils/filterFetch';
 import RecipesContext from '../../context/RecipesContext';
 
@@ -15,23 +15,18 @@ function SearchBar() {
   const path = window.location.pathname.split('/')[1];
   const navigate = useNavigate();
 
-  const { setLoading, setDrinks, setMeals, meals, drinks } = useContext(RecipesContext);
+  const { setLoading, setRecipes, recipes } = useContext(RecipesContext);
 
   const [searchForm, setSearchForm] = useState<SearchFormType>(INICIAL_VALUE);
 
   useEffect(() => {
     const handleNavigate = () => {
-      const verifyOneRecipe = meals.length === 1 || drinks.length === 1;
-      if (verifyOneRecipe) {
-        if (path === 'meals') {
-          navigate(`/${path}/${meals[0].idMeal}`);
-        } else if (path === 'drinks') {
-          navigate(`/${path}/${drinks[0].idDrink}`);
-        }
+      if (recipes.length === 1) {
+        navigate(`/${path}/${recipes[0].id}`);
       }
     };
     handleNavigate();
-  }, [meals, drinks, path, navigate]);
+  }, [recipes, path, navigate]);
 
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target;
@@ -43,23 +38,13 @@ function SearchBar() {
       return alert('Your search must contain only 1 (one) character');
     }
     setLoading(true);
-    if (path === 'meals') {
-      const dataResponse = await filterFetch(
-        path,
-        searchForm.radio as TypeSearch,
+    const dataResponse = await filterFetch(
+      path,
+      searchForm.radio as TypeSearch,
 
-        searchForm.infoInput,
-      ) as MealsType;
-      if (dataResponse) setMeals(dataResponse);
-    } else if (path === 'drinks') {
-      const dataResponse = await filterFetch(
-        path,
-        searchForm.radio as TypeSearch,
-
-        searchForm.infoInput,
-      ) as DrinksType;
-      if (dataResponse) setDrinks(dataResponse);
-    }
+      searchForm.infoInput,
+    ) as RecipesType;
+    if (dataResponse) setRecipes(dataResponse);
     setLoading(false);
     setSearchForm(INICIAL_VALUE);
   };

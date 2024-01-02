@@ -1,6 +1,7 @@
 import { act, waitFor } from '@testing-library/react';
 import Login from '../pages/Login';
 import renderWithRouter from './helpers/renderWithRouter';
+import RecipesProvider from '../context/RecipesProvider';
 import App from '../App';
 
 const emailInputID = 'email-input';
@@ -13,7 +14,11 @@ const passwordInvalid = '1234';
 
 describe('1 - Crie todos os elementos que devem respeitar os atributos descritos no protótipo para a tela de login', () => {
   it('Tem os data-testids email-input, password-input e login-submit-btn', () => {
-    const { getByTestId } = renderWithRouter(<Login />);
+    const { getByTestId } = renderWithRouter(
+      <RecipesProvider>
+        <Login />
+      </RecipesProvider>,
+    );
     expect(getByTestId(emailInputID)).toBeInTheDocument();
     expect(getByTestId(passwordInputID)).toBeInTheDocument();
     expect(getByTestId(buttonLoginID)).toBeInTheDocument();
@@ -22,7 +27,11 @@ describe('1 - Crie todos os elementos que devem respeitar os atributos descritos
 
 describe('2 - Desenvolva a tela de maneira que a pessoa deve conseguir escrever seu email no input de email', () => {
   it('É possível escrever o email e senha', async () => {
-    const { user, getByTestId } = renderWithRouter(<Login />);
+    const { user, getByTestId } = renderWithRouter(
+      <RecipesProvider>
+        <Login />
+      </RecipesProvider>,
+    );
 
     const email = getByTestId(emailInputID);
     const password = getByTestId(passwordInputID);
@@ -39,7 +48,11 @@ describe('2 - Desenvolva a tela de maneira que a pessoa deve conseguir escrever 
 
 describe('3 - Desenvolva a tela de maneira que o formulário só seja válido após um email válido e uma senha de mais de 6 caracteres serem preenchidos', () => {
   it('O botão deve estar desativado se o email for inválido', async () => {
-    const { user, getByTestId } = renderWithRouter(<Login />);
+    const { user, getByTestId } = renderWithRouter(
+      <RecipesProvider>
+        <Login />
+      </RecipesProvider>,
+    );
 
     const email = getByTestId(emailInputID);
     const password = getByTestId(passwordInputID);
@@ -56,7 +69,11 @@ describe('3 - Desenvolva a tela de maneira que o formulário só seja válido ap
   });
 
   it('O botão deve estar desativado se a senha for inválida ao ter menos que 7 caracteres', async () => {
-    const { user, getByTestId } = renderWithRouter(<Login />);
+    const { user, getByTestId } = renderWithRouter(
+      <RecipesProvider>
+        <Login />
+      </RecipesProvider>,
+    );
 
     const email = getByTestId(emailInputID);
     const password = getByTestId(passwordInputID);
@@ -73,7 +90,11 @@ describe('3 - Desenvolva a tela de maneira que o formulário só seja válido ap
   });
 
   it('O botão deve estar ativado se o email e a senha forem válidos', async () => {
-    const { user, getByTestId } = renderWithRouter(<Login />);
+    const { user, getByTestId } = renderWithRouter(
+      <RecipesProvider>
+        <Login />
+      </RecipesProvider>,
+    );
 
     const email = getByTestId(emailInputID);
     const password = getByTestId(passwordInputID);
@@ -95,7 +116,11 @@ describe('4 - Após a submissão do formulário, salve no localStorage o e-mail 
     localStorage.clear();
   });
   it('Após o login, os dados devem estar salvos no localStorage', async () => {
-    const { user, getByTestId } = renderWithRouter(<Login />);
+    const { user, getByTestId } = renderWithRouter(
+      <RecipesProvider>
+        <Login />
+      </RecipesProvider>,
+    );
 
     const button = getByTestId(buttonLoginID);
 
@@ -122,7 +147,11 @@ describe('5 - Redirecione a pessoa usuária para a tela principal de receitas de
   });
 
   it('A rota muda para a tela principal de receitas de comidas', async () => {
-    const { user, getByTestId } = renderWithRouter(<App />);
+    const { user, getByTestId } = renderWithRouter(
+      <RecipesProvider>
+        <App />
+      </RecipesProvider>,
+    );
 
     expect(getByTestId(buttonLoginID)).toBeDisabled();
 

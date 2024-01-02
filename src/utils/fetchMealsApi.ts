@@ -1,4 +1,5 @@
 import { DataMealsType } from '../types';
+import { dataProcessing } from './dataProcessing';
 
 const alertError = "Sorry, we haven't found any recipes for these filters";
 const errorNull = 'meals key returned null';
@@ -11,7 +12,10 @@ export const fetchMealsIngredient = async (ingredient: string) => {
     if (data.meals === null) {
       throw new Error(errorNull);
     }
-    return data.meals;
+
+    const meals = dataProcessing(data.meals, 'meals');
+
+    return meals;
   } catch (error) {
     console.log('Erro found when searching for Ingredient', error);
     window.alert(alertError);
@@ -28,7 +32,9 @@ export const fetchMealsName = async (name: string) => {
     if (data.meals === null) {
       throw new Error(errorNull);
     }
-    return data.meals;
+    const meals = dataProcessing(data.meals, 'meals');
+
+    return meals;
   } catch (error) {
     console.log('Erro found when searching for Name', error);
     window.alert(alertError);
@@ -49,7 +55,9 @@ export const fetchMealsFirstLetter = async (firstLetter: string) => {
     if (data.meals === null) {
       throw new Error(errorNull);
     }
-    return data.meals;
+    const meals = dataProcessing(data.meals, 'meals');
+
+    return meals;
   } catch (error) {
     console.log('Erro found when searching for FirstLetter', error);
     window.alert(alertError);
@@ -60,10 +68,16 @@ export const fetchMealsFirstLetter = async (firstLetter: string) => {
 export const fetchMealsRecommendation = async () => {
   try {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-    const data = await response.json();
-    return data;
+    const data: DataMealsType = await response.json();
+    if (data.meals === null) {
+      throw new Error(errorNull);
+    }
+    const meals = dataProcessing(data.meals, 'meals');
+
+    return meals;
   } catch (error) {
     console.log('Erro busca de recomendados', error);
+    return null;
   }
 };
 

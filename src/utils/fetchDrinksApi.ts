@@ -1,4 +1,5 @@
 import { DataDrinksType } from '../types';
+import { dataProcessing } from './dataProcessing';
 
 const alertError = "Sorry, we haven't found any recipes for these filters";
 const errorNull = 'drinks key returned null';
@@ -12,7 +13,10 @@ export const fetchDrinksIngredient = async (ingredient: string) => {
     if (data.drinks === null) {
       throw new Error(errorNull);
     }
-    return data.drinks;
+    const drinks = dataProcessing(data.drinks, 'drinks');
+    console.log(drinks);
+
+    return drinks;
   } catch (error) {
     console.log('Erro found when searching for Ingredient', error);
     window.alert(alertError);
@@ -29,7 +33,10 @@ export const fetchDrinksName = async (name: string) => {
     if (data.drinks === null) {
       throw new Error(errorNull);
     }
-    return data.drinks;
+
+    const drinks = dataProcessing(data.drinks, 'drinks');
+
+    return drinks;
   } catch (error) {
     console.log('Erro found when searching for Name', error);
     window.alert(alertError);
@@ -50,10 +57,30 @@ export const fetchDrinksFirstLetter = async (firstLetter: string) => {
     if (data.drinks === null) {
       throw new Error(errorNull);
     }
-    return data.drinks;
+    const drinks = dataProcessing(data.drinks, 'drinks');
+
+    return drinks;
   } catch (error) {
     console.log('Erro found when searching for FirstLetter', error);
     window.alert(alertError);
+    return null;
+  }
+};
+
+export const fetchDrinksRecommendation = async () => {
+  try {
+    const response = await fetch(
+      'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+    );
+    const data: DataDrinksType = await response.json();
+    if (data.drinks === null) {
+      throw new Error(errorNull);
+    }
+    const drinks = dataProcessing(data.drinks, 'drinks');
+
+    return drinks;
+  } catch (error) {
+    console.log('Erro found when searching for Recommendation', error);
     return null;
   }
 };

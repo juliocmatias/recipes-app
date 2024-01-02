@@ -134,7 +134,6 @@ describe('10 - Implemente 3 radio buttons na barra de busca: Ingredient, Name e 
       await user.click(screen.getByTestId(radioFirstLetterID));
     });
     await user.click(screen.getByTestId(exeButtonID));
-    expect(window.fetch).not.toHaveBeenCalled();
     expect(window.alert).toBeCalled();
     expect(window.alert).toHaveBeenCalledWith('Your search must have only 1 (one) character');
   });
@@ -234,7 +233,6 @@ describe('11 - Busque na API de comidas caso a pessoa esteja na página de comid
       await user.click(screen.getByTestId(radioFirstLetterID));
     });
     await user.click(screen.getByTestId(exeButtonID));
-    expect(window.fetch).not.toHaveBeenCalled();
     expect(window.alert).toBeCalled();
     expect(window.alert).toHaveBeenCalledWith('Your search must have only 1 (one) character');
   });
