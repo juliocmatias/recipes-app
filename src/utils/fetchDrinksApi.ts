@@ -14,7 +14,6 @@ export const fetchDrinksIngredient = async (ingredient: string) => {
       throw new Error(errorNull);
     }
     const drinks = dataProcessing(data.drinks, 'drinks');
-    console.log(drinks);
 
     return drinks;
   } catch (error) {
@@ -77,10 +76,10 @@ export const fetchDrinksRecommendation = async () => {
       throw new Error(errorNull);
     }
     const drinks = dataProcessing(data.drinks, 'drinks');
-
-    return drinks;
+    const limitedDrinks = drinks?.slice(0, 12);
+    return limitedDrinks;
   } catch (error) {
-    console.log('Erro found when searching for Recommendation', error);
+    console.log('Error when searching for recommended', error);
     return null;
   }
 };

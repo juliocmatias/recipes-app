@@ -8,6 +8,8 @@ import { mealsFirstLetter } from './mockMeals/mealsFirstLetter';
 import { mealsIngredients } from './mockMeals/mealsIngredients';
 import { mealsName } from './mockMeals/mealsName';
 import { mealsNotFound } from './mockMeals/mealsNotFound';
+import { mealsRecommendation } from './mockMeals/mealsRecommendation';
+import { drinksRecommendation } from './mockDrinks/drinksRecommendation';
 
 const POSSIBLE_RESPONSES: any = {
   'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=lemon': drinksIngredients,
@@ -24,6 +26,8 @@ const POSSIBLE_RESPONSES: any = {
   'https://www.themealdb.com/api/json/v1/1/search.php?s=xablau': mealsNotFound,
   'https://www.themealdb.com/api/json/v1/1/filter.php?i=xablau': mealsNotFound,
   'https://www.themealdb.com/api/json/v1/1/search.php?f=.': mealsNotFound,
+  'https://www.themealdb.com/api/json/v1/1/search.php?s=': mealsRecommendation,
+  'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=': drinksRecommendation,
 };
 
 export const fetchMock = async (url: string) => Promise.resolve({

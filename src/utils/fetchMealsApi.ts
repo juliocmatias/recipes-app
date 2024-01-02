@@ -73,10 +73,10 @@ export const fetchMealsRecommendation = async () => {
       throw new Error(errorNull);
     }
     const meals = dataProcessing(data.meals, 'meals');
-
-    return meals;
+    const limitedMeals = meals?.slice(0, 12);
+    return limitedMeals;
   } catch (error) {
-    console.log('Erro busca de recomendados', error);
+    console.log('Error when searching for recommended', error);
     return null;
   }
 };
