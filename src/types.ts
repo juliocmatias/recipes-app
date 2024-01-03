@@ -20,6 +20,7 @@ export type TypeSearch = 'ingredient'
 | 'name'
 | 'first-letter'
 | 'recommendation'
+| 'category'
 | 'default';
 
 export type RecipeType = {
@@ -101,3 +102,31 @@ export type SearchFormType = {
   infoInput: string;
   radio: string;
 };
+
+export type DataCategoryMealsType = {
+  meals: {
+    strCategory: string;
+  }[];
+};
+
+export type DataCategoryDrinksType = {
+  drinks: {
+    strCategory: string;
+  }[];
+};
+
+export type CategoryMealsType = [
+  'Beef',
+  'Breakfast',
+  'Chicken',
+  'Dessert',
+  'Goat',
+];
+
+export type CategoryDrinksType = [
+  'Ordinary Drink',
+  'Cocktail',
+  'Shake',
+  'Other/Unknown',
+  'Cocoa',
+];

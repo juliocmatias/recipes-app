@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+// import { useEffect } from 'react';
 import { RecipesType } from '../../types';
 import styles from './RecipesCards.module.css';
 
@@ -8,6 +9,18 @@ type RecipeCardsProps = {
 };
 
 export default function RecipesCards({ path, recipes }: RecipeCardsProps) {
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const verifyRecipes = () => {
+  //     if (recipes.length === 1) {
+  //       const { id } = recipes[0];
+  //       navigate(`/${path}/${id}`);
+  //     }
+  //   };
+  //   verifyRecipes();
+  // }, [navigate, path, recipes]);
+
   return (
     <div
       className={
@@ -16,7 +29,7 @@ export default function RecipesCards({ path, recipes }: RecipeCardsProps) {
     >
       {recipes && recipes.map((recipe, index) => (
         <Link
-          to={ `/${path}/${recipe}` }
+          to={ `/${path}/${recipe.id}` }
           key={ recipe.id }
           data-testid={ `${index}-recipe-card` }
           className={ styles.recipeCard }
@@ -33,7 +46,6 @@ export default function RecipesCards({ path, recipes }: RecipeCardsProps) {
             data-testid={ `${index}-card-name` }
           >
             {recipe.name}
-
           </p>
         </Link>
       ))}

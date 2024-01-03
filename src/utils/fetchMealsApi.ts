@@ -81,6 +81,20 @@ export const fetchMealsRecommendation = async () => {
   }
 };
 
+export const fetchMealsByCategory = async (category: string) => {
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+    const data = await response.json();
+
+    const meals = dataProcessing(data.meals, 'meals');
+
+    const limitedMeals = meals?.slice(0, 12);
+    return limitedMeals;
+  } catch (error) {
+    console.log('There was an error in the Meals API by category', error);
+  }
+};
+
 export const fetchMealsDetails = async (id: string) => {
   try {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -105,15 +119,5 @@ export const fetchMealsDetails = async (id: string) => {
   } catch (error) {
     console.error('Error fetching meal details:', error);
     return { meals: [] };
-  }
-};
-
-export const fetchMealsByCategory = async (category: string) => {
-  try {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log('Deu erro na API de Meals por categoria', error);
   }
 };

@@ -84,6 +84,21 @@ export const fetchDrinksRecommendation = async () => {
   }
 };
 
+export const fetchDrinksByCategory = async (category: string) => {
+  const newCategory = category === 'Other/Unknown' ? 'Other / Unknown' : category;
+  try {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${newCategory}`);
+    const data: DataDrinksType = await response.json();
+
+    const drinks = dataProcessing(data.drinks, 'drinks');
+
+    const limitedDrinks = drinks?.slice(0, 12);
+    return limitedDrinks;
+  } catch (error) {
+    console.log('There was an error in the Drinks API by category', error);
+  }
+};
+
 const API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 export const fetchDrinksDetails = async (id: string) => {
   try {
@@ -114,15 +129,5 @@ export const fetchDrinksDetails = async (id: string) => {
   } catch (error) {
     console.error('Error fetching drink details:', error);
     return {};
-  }
-};
-
-export const fetchDrinksByCategory = async (category: string) => {
-  try {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log('Deu erro na API de Drinks por categoria', error);
   }
 };

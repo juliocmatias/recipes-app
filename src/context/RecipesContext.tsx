@@ -12,6 +12,8 @@ type RecipesContextType = {
   setDrinks: React.Dispatch<React.SetStateAction<DrinksType>>
   showSearch: boolean,
   setShowSearch: React.Dispatch<React.SetStateAction<boolean>>,
+  filterRecipesCategory: RecipesType,
+  setFilterRecipesCategory: React.Dispatch<React.SetStateAction<RecipesType>>
 };
 
 const RecipesContext = createContext({} as RecipesContextType);

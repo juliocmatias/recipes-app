@@ -4,10 +4,11 @@ import Loading from '../Loading';
 import filterFetch from '../../utils/filterFetch';
 import { RecipesType } from '../../types';
 import RecipesCards from '../RecipesCards';
+import FilterCategories from '../FilterCategories';
 
 export default function Recipes() {
   const { loading,
-    setLoading, setRecipes, recipes } = useContext(RecipesContext);
+    setLoading, setRecipes, recipes, filterRecipesCategory } = useContext(RecipesContext);
 
   // pega o pathname da pagina atual
   const path = window.location.pathname.split('/')[1];
@@ -25,14 +26,27 @@ export default function Recipes() {
       setLoading(false);
     };
     getRecipes();
-  }, [path, setLoading, setRecipes]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [path]);
   return (
     <>
       {loading && <Loading />}
-      <RecipesCards
-        path={ path as 'meals' | 'drinks' }
-        recipes={ recipes }
-      />
+      {!loading && (
+        <>
+          <FilterCategories path={ path } />
+          {filterRecipesCategory && filterRecipesCategory.length > 0 ? (
+            <RecipesCards
+              path={ path as 'meals' | 'drinks' }
+              recipes={ filterRecipesCategory }
+            />
+          ) : (
+            <RecipesCards
+              path={ path as 'meals' | 'drinks' }
+              recipes={ recipes }
+            />
+          )}
+        </>
+      )}
     </>
   );
 }

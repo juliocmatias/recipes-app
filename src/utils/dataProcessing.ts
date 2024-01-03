@@ -34,6 +34,9 @@ const formatIngredients = (drink: DrinksType[0] | MealsType[0]): string[] => {
   return ingredients;
 };
 
+// const thumbAPieceOfAss = 'https://www.thecocktaildb.com/images/media/drink/tqxyxx1472719737.jpg';
+// const newThumbAPieceOfAss = 'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg';
+
 const transformDrink = (drink: DrinksType[0]): NewRecipe => {
   return {
     id: drink.idDrink,

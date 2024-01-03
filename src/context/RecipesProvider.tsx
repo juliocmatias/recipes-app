@@ -12,6 +12,7 @@ export default function RecipesProvider({ children }: UserProviderProps) {
   const [meals, setMeals] = useState<MealsType>([]);
   const [drinks, setDrinks] = useState<DrinksType>([]);
   const [showSearch, setShowSearch] = useState(false);
+  const [filterRecipesCategory, setFilterRecipesCategory] = useState<RecipesType>([]);
 
   const context = {
     loading,
@@ -24,6 +25,8 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     setMeals,
     showSearch,
     setShowSearch,
+    filterRecipesCategory,
+    setFilterRecipesCategory,
   };
   return (
     <UserContext.Provider value={ context }>
