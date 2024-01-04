@@ -17,6 +17,7 @@ export default function RecipesProvider({ children }: UserProviderProps) {
   const [filterRecipesStorage,
     setFilterRecipesStorage] = useState<RecipeLocalStorageType[]>([]);
   const [doneRecipes, setDoneRecipes] = useState<RecipeLocalStorageType[]>([]);
+  const [showAlert, setShowAlert] = useState(false);
 
   const context = {
     loading,
@@ -37,6 +38,8 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     setFilterRecipesStorage,
     doneRecipes,
     setDoneRecipes,
+    showAlert,
+    setShowAlert,
   };
   return (
     <UserContext.Provider value={ context }>

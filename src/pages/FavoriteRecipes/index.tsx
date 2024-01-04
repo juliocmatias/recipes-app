@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
-// import CardFavorites from '../components/CardFavorites';
 import { getLocalStorage } from '../../utils/locaStorage';
 import FilterRecipesStorage from '../../components/FilterRecipesStorage';
 import styles from './FavoriteRecipes.module.css';
 import RecipesContext from '../../context/RecipesContext';
+import RecipesCardsStor from '../../components/RecipesCardsStor';
 
 function FavoriteRecipes() {
   const { favorites, setFavorites, filterRecipesStorage } = useContext(RecipesContext);
@@ -31,10 +31,14 @@ function FavoriteRecipes() {
         filterRecipesStorage.length > 0
           ? (
             <div className={ styles.container }>
-              <CardFavorites favorite={ filterRecipesStorage } />
+              <RecipesCardsStor favorite={ filterRecipesStorage } />
             </div>
           )
-          : (<div><CardFavorites favorite={ favorites } /></div>)
+          : (
+            <div className={ styles.container }>
+              <RecipesCardsStor favorite={ favorites } />
+            </div>
+          )
       }
     </>
   );

@@ -20,6 +20,8 @@ type RecipesContextType = {
   setFilterRecipesStorage: React.Dispatch<React.SetStateAction<RecipeLocalStorageType[]>>
   doneRecipes: RecipeLocalStorageType[],
   setDoneRecipes: React.Dispatch<React.SetStateAction<RecipeLocalStorageType[]>>
+  showAlert: boolean,
+  setShowAlert: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 const RecipesContext = createContext({} as RecipesContextType);
