@@ -8,8 +8,8 @@ import styles from './InteractiveBtn.module.css';
 import RecipesContext from '../../context/RecipesContext';
 
 type InteractiveBtnProps = {
-  srcShare?: typeof heartBlack | typeof heartWhite;
-  srcFavorite?: typeof share;
+  srcShare?: typeof share;
+  srcFavorite?: typeof heartBlack | typeof heartWhite;
   dataShare?: string;
   dataFavorite?: string;
   id?: string;
@@ -30,6 +30,9 @@ export default function InteractiveBtn({
 }: InteractiveBtnProps = {}) {
   const { setShowAlert, setFavorites,
     setFilterRecipesStorage } = useContext(RecipesContext);
+
+  const path = window.location.pathname.split('/')[1];
+  const verifyPath = path !== 'done-recipes';
 
   const handleShare = (ID: string, TYPE: string) => {
     if (TYPE === 'meal') {
@@ -77,12 +80,12 @@ export default function InteractiveBtn({
         >
           <img
             src={ srcShare }
-            alt="Favorite button share icon"
+            alt="Button share icon"
             data-testid={ dataShare }
           />
         </button>
       )}
-      { srcFavorite && (
+      { verifyPath && srcFavorite && (
 
         <button
           type="button"
@@ -90,7 +93,7 @@ export default function InteractiveBtn({
         >
           <img
             src={ srcFavorite }
-            alt={ `Favorite button ${srcFavorite === heartBlack
+            alt={ `Button ${srcFavorite === heartBlack
               ? 'black' : 'white'} heart icon` }
             data-testid={ dataFavorite }
           />

@@ -22,21 +22,17 @@ function FavoriteRecipes() {
   }
   return (
     <>
-      <FilterRecipesStorage
-        testIDAll="filter-by-all-btn"
-        testIDMeal="filter-by-meal-btn"
-        testIDDrink="filter-by-drink-btn"
-      />
+      <FilterRecipesStorage />
       {
         filterRecipesStorage.length > 0
           ? (
             <div className={ styles.container }>
-              <RecipesCardsStor favorite={ filterRecipesStorage } />
+              <RecipesCardsStor recipes={ filterRecipesStorage } />
             </div>
           )
           : (
             <div className={ styles.container }>
-              <RecipesCardsStor favorite={ favorites } />
+              <RecipesCardsStor recipes={ favorites } />
             </div>
           )
       }

@@ -18,6 +18,17 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     setFilterRecipesStorage] = useState<RecipeLocalStorageType[]>([]);
   const [doneRecipes, setDoneRecipes] = useState<RecipeLocalStorageType[]>([]);
   const [showAlert, setShowAlert] = useState(false);
+  const [idLinkAlert, setIdLinkAlert] = useState({
+    id: '',
+    type: '',
+  });
+
+  const handleIdLink = (idLink: string, typeLink: string) => {
+    setIdLinkAlert({
+      id: idLink,
+      type: typeLink,
+    });
+  };
 
   const context = {
     loading,
@@ -40,6 +51,9 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     setDoneRecipes,
     showAlert,
     setShowAlert,
+    idLinkAlert,
+    setIdLinkAlert,
+    handleIdLink,
   };
   return (
     <UserContext.Provider value={ context }>

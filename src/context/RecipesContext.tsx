@@ -22,6 +22,15 @@ type RecipesContextType = {
   setDoneRecipes: React.Dispatch<React.SetStateAction<RecipeLocalStorageType[]>>
   showAlert: boolean,
   setShowAlert: React.Dispatch<React.SetStateAction<boolean>>
+  idLinkAlert: {
+    id: string,
+    type: string,
+  },
+  setIdLinkAlert: React.Dispatch<React.SetStateAction<{
+    id: string,
+    type: string,
+  }>>
+  handleIdLink: (idLink: string, typeLink: string) => void
 };
 
 const RecipesContext = createContext({} as RecipesContextType);

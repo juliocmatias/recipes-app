@@ -1,12 +1,12 @@
-.image_favorite {
+.image_recipe {
   border-radius: 5px 0 0 5px;
-  height: 134px;
+  height: 150px;
   width: 166px;
 
 }
 
 
-.card_recipe_favorite {
+.card_recipe {
   background: white;
   border: 0.518px solid #b1b1b1;
   border-radius: 5px;
@@ -21,26 +21,33 @@
   color: #1a1b1c;
   font-size: 18px;
   font-weight: 700;
-  margin-top: 18px;
-
+  margin: 2px 0;
+  margin-top: 8px;
 }
 
 .link {
+  display: flex;
+  justify-content: center;
   text-decoration: none;
 }
 
 
 .info_recipe {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   margin-left: 20px;
 }
 
 .subtitle {
+  align-items: center;
   color: #797d86;
+  display: flex;
+  flex-direction: column;
   font-size: 12px;
   font-weight: 300;
+  padding: 5px 0;
 }
 
 

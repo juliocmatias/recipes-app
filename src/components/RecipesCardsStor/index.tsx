@@ -1,46 +1,43 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import InteractiveBtn from '../InteractiveBtn/index';
+import { useContext } from 'react';
 import { RecipeLocalStorageType } from '../../types';
-import share from '../../images/shareIcon.svg';
-import heartBlack from '../../images/blackHeartIcon.svg';
 import styles from './RecipesCardsStor.module.css';
 import ShowShareAlert from '../ShowShareAlert';
-import RecipeTitle from '../RecipeTitle';
+import RecipesContext from '../../context/RecipesContext';
+import InfoRecipe from '../InfoRecipe';
 
-type CardFavoritesProps = {
-  favorite: RecipeLocalStorageType[];
+type RecipesCardsStorProps = {
+  recipes: RecipeLocalStorageType[];
 };
 
-export default function RecipesCardsStor({ favorite }: CardFavoritesProps) {
-  const [idLinkAlert, setIdLinkAlert] = useState({
-    id: '',
-    type: '',
-  });
-
-  const handleIdLink = (idLink: string, typeLink: string) => {
-    setIdLinkAlert({
-      id: idLink,
-      type: typeLink,
-    });
-  };
+export default function RecipesCardsStor({ recipes }: RecipesCardsStorProps) {
+  const { idLinkAlert } = useContext(RecipesContext);
   return (
-    favorite.length > 0 && favorite.map((recipe, index) => (
+    recipes.length > 0 && recipes.map((recipe, index) => (
       <div key={ recipe.id }>
         {idLinkAlert.id === recipe.id && idLinkAlert.type === recipe.type
         && <ShowShareAlert />}
-        <div className={ styles.card_recipe_favorite }>
+        <div className={ styles.card_recipe }>
           <div className="img-recipe">
             <Link to={ `/${recipe.type}s/${recipe.id}` }>
               <img
-                className={ styles.image_favorite }
+                className={ styles.image_recipe }
                 src={ recipe.image }
                 alt={ recipe.name }
                 data-testid={ `${index}-horizontal-image` }
               />
             </Link>
           </div>
-          <div className={ styles.info_recipe }>
+          <InfoRecipe
+            classInfoRecipe={ styles.info_recipe }
+            classLink={ styles.link }
+            recipe={ recipe }
+            index={ index }
+            classNameTitle={ styles.title_recipe }
+            classNameDiv={ styles.name_recipe }
+            classSubtitle={ styles.subtitle }
+          />
+          {/* <div className={ styles.info_recipe }>
 
             <Link
               className={ styles.link }
@@ -77,7 +74,7 @@ export default function RecipesCardsStor({ favorite }: CardFavoritesProps) {
               type={ recipe.type }
               handleIdLink={ handleIdLink }
             />
-          </div>
+          </div> */}
         </div>
 
       </div>

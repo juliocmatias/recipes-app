@@ -1,0 +1,18 @@
+.done_tags {
+  background-color: #d9d9d9;
+  border: 1px outset black;
+  border-radius: 10px;
+  display: flex;
+  padding: 1px 4px;
+}
+
+.done_info {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.done_date {
+  padding: 5px;
+}

@@ -6,14 +6,13 @@ import Drinks from '../../images/filtros/storage/drinks.svg';
 import styles from './FilterRecipesStorage.module.css';
 import RecipesContext from '../../context/RecipesContext';
 
-type FilterRecipesProps = {
-  testIDAll: string;
-  testIDMeal: string;
-  testIDDrink: string;
-};
+// type FilterRecipesProps = {
+//   testIDAll: string;
+//   testIDMeal: string;
+//   testIDDrink: string;
+// };
 
-export default function FilterRecipesStorage({ testIDAll,
-  testIDDrink, testIDMeal }: FilterRecipesProps) {
+export default function FilterRecipesStorage() {
   const { favorites, doneRecipes, setFilterRecipesStorage } = useContext(RecipesContext);
 
   // pegar o pathName para saber qual pagina está sendo renderizada
@@ -51,21 +50,21 @@ export default function FilterRecipesStorage({ testIDAll,
     <div className={ styles.filters_Recipes }>
       <button
         type="button"
-        data-testid={ testIDAll }
+        data-testid="filter-by-all-btn"
         onClick={ (event) => handleFilter(event) }
       >
         <img src={ ALLRecipes } alt="All Recipes Filter Icon" />
       </button>
       <button
         type="button"
-        data-testid={ testIDMeal }
+        data-testid="filter-by-meal-btn"
         onClick={ (event) => handleFilter(event) }
       >
         <img src={ Foots } alt="Meals Filter Icon" />
       </button>
       <button
         type="button"
-        data-testid={ testIDDrink }
+        data-testid="filter-by-drink-btn"
         onClick={ (event) => handleFilter(event) }
       >
         <img src={ Drinks } alt="Drinks Filter Icon" />
