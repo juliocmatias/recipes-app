@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { DrinksType, MealsType, RecipesType } from '../types';
+import { DrinksType, MealsType, RecipeLocalStorageType, RecipesType } from '../types';
 
 type RecipesContextType = {
   loading: boolean,
@@ -14,6 +14,12 @@ type RecipesContextType = {
   setShowSearch: React.Dispatch<React.SetStateAction<boolean>>,
   filterRecipesCategory: RecipesType,
   setFilterRecipesCategory: React.Dispatch<React.SetStateAction<RecipesType>>
+  favorites: RecipeLocalStorageType[],
+  setFavorites: React.Dispatch<React.SetStateAction<RecipeLocalStorageType[]>>
+  filterRecipesStorage: RecipeLocalStorageType[],
+  setFilterRecipesStorage: React.Dispatch<React.SetStateAction<RecipeLocalStorageType[]>>
+  doneRecipes: RecipeLocalStorageType[],
+  setDoneRecipes: React.Dispatch<React.SetStateAction<RecipeLocalStorageType[]>>
 };
 
 const RecipesContext = createContext({} as RecipesContextType);

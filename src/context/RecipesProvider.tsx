@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import UserContext from './RecipesContext';
-import { DrinksType, MealsType, RecipesType } from '../types';
+import { DrinksType, MealsType, RecipeLocalStorageType, RecipesType } from '../types';
 
 type UserProviderProps = {
   children: React.ReactNode
@@ -13,6 +13,10 @@ export default function RecipesProvider({ children }: UserProviderProps) {
   const [drinks, setDrinks] = useState<DrinksType>([]);
   const [showSearch, setShowSearch] = useState(false);
   const [filterRecipesCategory, setFilterRecipesCategory] = useState<RecipesType>([]);
+  const [favorites, setFavorites] = useState<RecipeLocalStorageType[]>([]);
+  const [filterRecipesStorage,
+    setFilterRecipesStorage] = useState<RecipeLocalStorageType[]>([]);
+  const [doneRecipes, setDoneRecipes] = useState<RecipeLocalStorageType[]>([]);
 
   const context = {
     loading,
@@ -27,6 +31,12 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     setShowSearch,
     filterRecipesCategory,
     setFilterRecipesCategory,
+    favorites,
+    setFavorites,
+    filterRecipesStorage,
+    setFilterRecipesStorage,
+    doneRecipes,
+    setDoneRecipes,
   };
   return (
     <UserContext.Provider value={ context }>
