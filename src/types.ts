@@ -98,6 +98,15 @@ export type DataDrinksType = {
   }[];
 };
 
+export type DataMockType = {
+  strMeal: string;
+  strMealThumb: string;
+  idMeal: string;
+  strDrink: string;
+  strDrinkThumb: string;
+  idDrink: string;
+}[];
+
 export type SearchFormType = {
   infoInput: string;
   radio: string;
