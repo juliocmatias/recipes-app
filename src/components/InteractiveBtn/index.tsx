@@ -29,7 +29,7 @@ export default function InteractiveBtn({
   handleIdLink,
 }: InteractiveBtnProps = {}) {
   const { setShowAlert, setFavorites,
-    setFilterRecipesStorage } = useContext(RecipesContext);
+    setFilterRecipesStorage, setIsFavorite } = useContext(RecipesContext);
 
   const path = window.location.pathname.split('/')[1];
   const verifyPath = path !== 'done-recipes';
@@ -63,10 +63,12 @@ export default function InteractiveBtn({
       deleteLocalStorage('favoriteRecipes', ID);
       setFavorites((prev) => prev.filter((item) => item.id !== ID));
       setFilterRecipesStorage((prev) => prev.filter((item) => item.id !== ID));
+      setIsFavorite(false);
     } else {
       putLocalStorage('favoriteRecipes', RECIPE);
       setFavorites((prev) => [...prev, RECIPE]);
       setFilterRecipesStorage((prev) => prev.filter((item) => item.id !== ID));
+      setIsFavorite(true);
     }
   };
 

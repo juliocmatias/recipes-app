@@ -31,6 +31,28 @@ type RecipesContextType = {
     type: string,
   }>>
   handleIdLink: (idLink: string, typeLink: string) => void
+  recipesInProgress: {
+    meals: {
+      [id: string]: string[]
+    },
+    drinks: {
+      [id: string]: string[]
+    },
+  },
+  setRecipesInProgress: React.Dispatch<React.SetStateAction<{
+    meals: {
+      [id: string]: string[]
+    },
+    drinks: {
+      [id: string]: string[]
+    },
+  }>>
+  isFavorite: boolean,
+  setIsFavorite: React.Dispatch<React.SetStateAction<boolean>>
+  isDone: boolean,
+  setIsDone: React.Dispatch<React.SetStateAction<boolean>>
+  isInProgress: boolean,
+  setIsInProgress: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 const RecipesContext = createContext({} as RecipesContextType);

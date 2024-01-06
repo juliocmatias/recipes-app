@@ -10,22 +10,10 @@
 
 @media ( max-width : 500px ) {
 
-  .container_filters {
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: flex-start;
-  }
-
   .icons {
-    height: 100px;
-    width: 100px;
+    height: 90px;
+    width: 90px;
   }
-
-  button {
-    flex-basis: calc(33.33% - 8px);
-
-  }
-
 
 }
 

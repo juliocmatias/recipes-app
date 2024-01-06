@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import UserContext from './RecipesContext';
-import { DrinksType, MealsType, RecipeLocalStorageType, RecipesType } from '../types';
+import { DrinksType,
+  InProgressRecipesType, MealsType, RecipeLocalStorageType, RecipesType } from '../types';
 
 type UserProviderProps = {
   children: React.ReactNode
@@ -22,6 +23,14 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     id: '',
     type: '',
   });
+  const [recipesInProgress, setRecipesInProgress] = useState<InProgressRecipesType>({
+    meals: {},
+    drinks: {},
+  });
+
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isDone, setIsDone] = useState(false);
+  const [isInProgress, setIsInProgress] = useState(false);
 
   const handleIdLink = (idLink: string, typeLink: string) => {
     setIdLinkAlert({
@@ -54,6 +63,14 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     idLinkAlert,
     setIdLinkAlert,
     handleIdLink,
+    recipesInProgress,
+    setRecipesInProgress,
+    isFavorite,
+    setIsFavorite,
+    isDone,
+    setIsDone,
+    isInProgress,
+    setIsInProgress,
   };
   return (
     <UserContext.Provider value={ context }>

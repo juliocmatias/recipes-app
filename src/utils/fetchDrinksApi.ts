@@ -103,31 +103,13 @@ const API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 export const fetchDrinksDetails = async (id: string) => {
   try {
     const response = await fetch(`${API_URL}lookup.php?i=${id}`);
-    const data = await response.json();
+    const data: DataDrinksType = await response.json();
 
-    if (data.drinks && data.drinks.length > 0) {
-      const drink = data.drinks[0];
-      const ingredients = [];
+    const drinks = dataProcessing(data.drinks, 'drinks');
 
-      for (let i = 1; i <= 15; i++) {
-        const ingredient = drink[`strIngredient${i}`];
-        const measure = drink[`strMeasure${i}`];
-
-        if (ingredient && measure) {
-          ingredients.push(`${ingredient} - ${measure}`);
-        } else if (ingredient) {
-          ingredients.push(ingredient);
-        }
-      }
-
-      drink.ingredients = ingredients;
-
-      drink.containsAlcoholic = drink.strAlcoholic === 'Alcoholic';
-    }
-
-    return data;
+    return drinks;
   } catch (error) {
     console.error('Error fetching drink details:', error);
-    return {};
+    return null;
   }
 };

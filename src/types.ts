@@ -1,4 +1,5 @@
-export type KeyLocalStorageType = 'favoriteRecipes' | 'doneRecipes' | 'user' | 'clear';
+export type KeyLocalStorageType = 'favoriteRecipes'
+| 'doneRecipes' | 'user' | 'clear' | 'inProgressRecipes';
 
 export type RecipeLocalStorageType = {
   id: string;
@@ -10,6 +11,15 @@ export type RecipeLocalStorageType = {
   image: string;
   doneDate?: string;
   tags?: string[];
+};
+
+export type InProgressRecipesType = {
+  meals: {
+    [id: string]: string[],
+  },
+  drinks: {
+    [id: string]: string[],
+  },
 };
 
 export type UserLocalStorageType = {
@@ -79,6 +89,7 @@ export type DataMealsType = {
     strYoutube?: string;
     strTags?: string;
     dateModified?: string;
+    [key: string]: any;
   }[];
 };
 
@@ -95,6 +106,7 @@ export type DataDrinksType = {
     containsAlcoholic?: boolean;
     strTags?: string;
     dateModified?: string;
+    [key: string]: any;
   }[];
 };
 

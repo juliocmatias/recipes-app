@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getLocalStorage } from '../../utils/locaStorage';
+import { deleteLocalStorage, getLocalStorage } from '../../utils/locaStorage';
 import done from '../../images/doneRecipeIcon.svg';
 import favorite from '../../images/favoriteRecipeIcon.svg';
 import logout from '../../images/logout.svg';
@@ -70,7 +70,7 @@ function Profile() {
             type="button"
             data-testid="profile-logout-btn"
             onClick={ () => {
-              localStorage.clear();
+              deleteLocalStorage('clear');
               navigate('/');
             } }
           >

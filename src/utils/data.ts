@@ -45,3 +45,37 @@ const dataMeals = {
     },
   ],
 };
+
+// // a função handleFavorite deve receber o ID da receita
+// // e verificar se o ID da recipeDetails já está no array de favorites
+// // se estiver, deve recipeDetails remover do favorites
+// // se não estiver, deve adicionar o recipeDetails no favorites
+// const handleFavorite = (ID: string) => {
+//   // const {
+//   //   id: recipeId,
+//   //   type,
+//   //   category,
+//   //   nationality,
+//   //   alcoholicOrNot,
+//   //   name,
+//   //   image,
+//   //   doneDate,
+//   //   tags,
+//   // } = recipeDetails;
+
+//   // const favoriteRecipe = {
+//   //   id: recipeId,
+//   //   type,
+//   //   nationality,
+//   //   category,
+//   //   alcoholicOrNot,
+//   //   name,
+//   //   image,
+//   //   doneDate,
+//   //   tags,
+//   // };
+
+//   // const favoriteRecipes = [...favorites, favoriteRecipe];
+//   // setFavorites(favoriteRecipes);
+//   // putLocalStorage('favoriteRecipes', favoriteRecipe);
+// };

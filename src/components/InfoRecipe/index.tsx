@@ -95,6 +95,7 @@ export default function InfoRecipe({
           dataFavorite={ `${index}-horizontal-favorite-btn` }
           id={ recipe.id }
           type={ recipe.type }
+          recipe={ recipe }
           handleIdLink={ handleIdLink }
         />
       </div>

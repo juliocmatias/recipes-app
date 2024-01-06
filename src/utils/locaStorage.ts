@@ -1,4 +1,4 @@
-import { KeyLocalStorageType,
+import { InProgressRecipesType, KeyLocalStorageType,
   RecipeLocalStorageType, UserLocalStorageType } from '../types';
 // a função putLocalStorage é responsável por adicionar um item ao localStorage
 // ela deverá receber chave e valor como parâmetros
@@ -30,7 +30,7 @@ import { KeyLocalStorageType,
 export const putLocalStorage = (
   key: KeyLocalStorageType,
 
-  value: RecipeLocalStorageType | UserLocalStorageType,
+  value: RecipeLocalStorageType | UserLocalStorageType | InProgressRecipesType,
 ) => {
   switch (key) {
     case 'user': {
@@ -45,6 +45,15 @@ export const putLocalStorage = (
       localStorage
         .setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes, value]));
       break; }
+    case 'inProgressRecipes': {
+      const valueInProgress = value as InProgressRecipesType;
+      const inProgressRecipes = JSON
+        .parse(localStorage.getItem('inProgressRecipes') || '{}');
+      localStorage
+        .setItem('inProgressRecipes', JSON
+          .stringify({ ...inProgressRecipes, ...valueInProgress }));
+      break;
+    }
     default:
       return null;
   }
@@ -84,6 +93,26 @@ export const deleteLocalStorage = (key: KeyLocalStorageType, id?: string) => {
         .filter((recipe: RecipeLocalStorageType) => recipe.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
       break; }
+    case 'inProgressRecipes': {
+      const inProgressRecipes: InProgressRecipesType = JSON.parse(localStorage
+        .getItem('inProgressRecipes') || '{}');
+      const newInProgressRecipes = Object.keys(inProgressRecipes)
+        .reduce((
+          acc: InProgressRecipesType,
+          recipeId: string,
+        ) => {
+          if (recipeId !== id) {
+            return { ...acc,
+              [recipeId]:
+              inProgressRecipes[recipeId as keyof InProgressRecipesType] };
+          }
+          return acc;
+        }, { meals: {}, drinks: {} });
+      console.log(newInProgressRecipes);
+
+      // localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressRecipes));
+      break;
+    }
     default:
       localStorage.clear();
   }
