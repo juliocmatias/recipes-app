@@ -4,6 +4,7 @@ import RecipesContext from '../../context/RecipesContext';
 
 export default function ShowShareAlert() {
   const { showAlert } = useContext(RecipesContext);
+
   return (
     showAlert && (
       <span>

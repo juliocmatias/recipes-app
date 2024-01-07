@@ -98,6 +98,7 @@ export default function InteractiveBtn({
             alt={ `Button ${srcFavorite === heartBlack
               ? 'black' : 'white'} heart icon` }
             data-testid={ dataFavorite }
+            className={ styles.favorite_icon }
           />
         </button>
       )}

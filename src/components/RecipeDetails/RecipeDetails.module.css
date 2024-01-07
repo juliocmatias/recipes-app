@@ -2,9 +2,6 @@
   background-position: center;
   background-size: cover;
   height: 162px;
-  left: 0;
-  position: absolute;
-  top: 0;
   width: 100%;
 }
 
@@ -26,13 +23,14 @@
   font-family: Epilogue-Black , Helvetica , Arial , sans-serif;
   font-size: 20px;
   font-weight: 900;
-  left: 109px;
+  left: 50%; /* Posiciona o elemento no meio horizontalmente */
   letter-spacing: 2.1px;
   line-height: normal;
   position: absolute;
   text-align: center;
   top: 80px;
-  width: 80%;
+  transform: translateX(-50%);
+
 }
 
 .category_card {
@@ -43,7 +41,7 @@
   left: 17px;
   position: absolute;
   top: 14px;
-  width: 140px;
+  width: auto;
 }
 
 .category_name {
@@ -64,11 +62,27 @@
 
 .interactive_btn {
   position: absolute;
-  right: 20px; /* Ajuste conforme necessário */
+  right: 40px; /* Ajuste conforme necessário */
   top: 20px; /* Ajuste conforme necessário */
   z-index: 1; /* Coloca o botão na frente da imagem */
 }
 
+@media ( max-width : 250px ) {
+
+  .category_card {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .interactive_btn {
+    left: 50%;
+    right: 0;
+    top: 50px;
+    transform: translateX(-50%);
+  }
+}
+
+/*
 @media ( max-width : 650px ) {
 
   .recipe_title {
@@ -81,4 +95,5 @@
   .recipe_title {
     width: 40%;
   }
-}
+} */
+

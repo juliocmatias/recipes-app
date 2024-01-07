@@ -7,7 +7,7 @@ import Loading from '../../components/Loading';
 import { RecipeType } from '../../types';
 
 export default function MealRecipe() {
-  const [recipeDetails, setRecipeDetails] = useState({} as RecipeType);
+  const [recipe, setRecipe] = useState({} as RecipeType);
   const param = useParams();
   const { id } = param;
 
@@ -21,7 +21,7 @@ export default function MealRecipe() {
       setLoading(true);
       if (id) {
         const data = await fetchMealsDetails(id);
-        if (data) setRecipeDetails(data[0]);
+        if (data) setRecipe(data[0]);
       }
       setLoading(false);
     };
@@ -32,7 +32,7 @@ export default function MealRecipe() {
 
   return (
     <RecipeDetails
-      recipeDetails={ recipeDetails }
+      recipe={ recipe }
     />
   );
 }

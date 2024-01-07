@@ -3,3 +3,8 @@
   gap: 16px;
   padding-bottom: 4px;
 }
+
+.favorite_icon {
+  height: 24px;
+  width: 24px;
+}
