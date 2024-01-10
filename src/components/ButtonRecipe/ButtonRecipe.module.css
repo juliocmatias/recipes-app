@@ -1,0 +1,17 @@
+.recipe_btn {
+  align-items: center;
+  background-color: #19a48d;
+  border-radius: 6px;
+  bottom: 0;
+  color: black;
+  display: flex;
+  font-size: 16pt;
+  font-weight: 600;
+  left: 50%;
+  margin-bottom: 5px;
+  padding: 5px;
+  position: fixed;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  width: fit-content;
+}

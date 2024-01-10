@@ -31,7 +31,7 @@ function Header({ namePage, pageIcon }: HeaderProps) {
 
     <header className={ styles.header }>
       <div className={ styles.container_header }>
-        <div>
+        <div className={ styles.logo }>
           <img src={ logo } alt="logo" />
           <img
             className={ styles.appName }

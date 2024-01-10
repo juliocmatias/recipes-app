@@ -18,6 +18,7 @@ header {
 }
 
 .container_header {
+  align-items: center;
   background-color: #19a48d;
   display: flex;
   height: 52px;
@@ -47,4 +48,8 @@ button {
   color: black;
   font-family: Epilogue , sans-serif;
   font-weight: 900;
+}
+
+.logo {
+  display: flex;
 }

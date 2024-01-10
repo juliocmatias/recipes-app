@@ -37,33 +37,35 @@ export default function CarouselRecommendation({ path }: CarouselRecommendationP
   }, [path]);
 
   return (
-    <>
-      <h2 className={ styles.recommended_title }>Recommended</h2>
-      <div className={ styles.container_recipes }>
-        { !pageInProgress && recipesRecommendation.length > 0
-      && recipesRecommendation.map((recipe, index) => (
-        <Link
-          to={ `/${pathRecommendation}/${recipe.id}` }
-          key={ recipe.id }
-          data-testid={ `${index}-recommendation-card` }
-          className={ `${styles.recipeCard}` }
-        >
-          <img
-            src={ recipe.image }
-            alt={ recipe.name }
-            width={ 400 }
-            className={ `${styles.recipeImg}` }
-            data-testid={ `${index}-card-img` }
-          />
-          <p
-            className={ styles.name_recipe }
-            data-testid={ `${index}-recommendation-title` }
-          >
-            {recipe.name}
-          </p>
-        </Link>
-      ))}
-      </div>
-    </>
+    !pageInProgress && (
+      <>
+        <h2 className={ styles.recommended_title }>Recommended</h2>
+        <div className={ styles.container_recipes }>
+          { recipesRecommendation.length > 0
+            && recipesRecommendation.map((recipe, index) => (
+              <Link
+                to={ `/${pathRecommendation}/${recipe.id}` }
+                key={ recipe.id }
+                data-testid={ `${index}-recommendation-card` }
+                className={ `${styles.recipeCard}` }
+              >
+                <img
+                  src={ recipe.image }
+                  alt={ recipe.name }
+                  width={ 400 }
+                  className={ `${styles.recipeImg}` }
+                  data-testid={ `${index}-card-img` }
+                />
+                <p
+                  className={ styles.name_recipe }
+                  data-testid={ `${index}-recommendation-title` }
+                >
+                  {recipe.name}
+                </p>
+              </Link>
+            ))}
+        </div>
+      </>
+    )
   );
 }

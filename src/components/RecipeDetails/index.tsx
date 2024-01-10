@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { RecipeType } from '../../types';
 import RecipesContext from '../../context/RecipesContext';
 import useRecipeDetails from '../../hooks/useRecipeDetails';
@@ -12,6 +12,7 @@ import drinkCategory from '../../images/iconDrinkCategory.svg';
 import ShowShareAlert from '../ShowShareAlert';
 import Ingredients from '../Ingredients';
 import CarouselRecommendation from '../CarouselRecommendation';
+import ButtonRecipe from '../ButtonRecipe';
 
 // const INITIAL_STATE: RecipeType = {
 //   id: '',
@@ -31,6 +32,7 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
   const { handleIdLink } = useContext(RecipesContext);
 
   const path = window.location.pathname.split('/')[1];
+  const pathPage = window.location.pathname;
 
   const {
     isDone, isFavorite, isInProgress } = useRecipeDetails(recipe);
@@ -111,6 +113,7 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
               title="Recipe Video"
               width="340"
               height="315"
+              className={ styles.video }
               src={ recipe.video.replace('watch?v=', 'embed/') }
               data-testid="video"
               allowFullScreen
@@ -120,6 +123,12 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
         )
       }
       <CarouselRecommendation path={ path } />
+      <ButtonRecipe
+        id={ recipe.id }
+        path={ path }
+        isDone={ isDone }
+        dataTestId={ pathPage.includes('in-progress') ? 'finish' : 'start' }
+      />
     </>
   );
 }

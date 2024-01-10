@@ -13,16 +13,37 @@ type IngredientsProps = {
 
 export default function Ingredients({ ingredients, inProgress }: IngredientsProps) {
   const [pageInProgress, setPageInProgress] = useState(false);
-  const { recipesInProgress } = useContext(RecipesContext);
+  const { recipesInProgress, setRecipesInProgress } = useContext(RecipesContext);
+  const [ingredientsChecked, setIngredientsChecked] = useState([]);
+
+  const path = window.location.pathname;
 
   useEffect(() => {
-    const pathName = window.location.pathname;
-    setPageInProgress(pathName.includes('in-progress'));
-  }, []);
+    setPageInProgress(path.includes('in-progress'));
+    const verifyRecipeInProgress = () => {
+    };
+    verifyRecipeInProgress();
+  }, [path]);
 
   // console.log(ingredients);
   // console.log(pageInProgress);
   // console.log(recipesInProgress);
+  const handleRecipeInProgress = (ingredient: string) => {
+    const pathName = window.location.pathname.split('/')[1];
+    const id = window.location.pathname.split('/')[2];
+    if (pathName === 'meals' || pathName === 'drinks') {
+      const verifyId = recipesInProgress[pathName][id];
+      const verifyIngredient = verifyId?.filter((item) => item !== ingredient);
+      setRecipesInProgress((prevState) => ({
+        ...prevState,
+        [pathName]: {
+          ...prevState[pathName],
+          [id]: verifyId ? [...verifyIngredient, ingredient] : [ingredient],
+        },
+      }));
+    }
+  };
+  // console.log(ingredients);
 
   return (
     <div className="ingredients_Card">
@@ -37,6 +58,7 @@ export default function Ingredients({ ingredients, inProgress }: IngredientsProp
             type="checkbox"
             id={ ingredient }
             name={ ingredient }
+            onClick={ () => handleRecipeInProgress(ingredient) }
           />
           { ingredient }
         </label>

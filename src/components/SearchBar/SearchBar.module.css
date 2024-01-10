@@ -6,7 +6,7 @@
   font-weight: 400;
   height: 40px;
   padding-left: 20px;
-  width: 338px;
+  width: 300px;
 
 }
 
@@ -26,9 +26,8 @@ h1 {
   height: 88px;
   justify-content: center;
   margin-top: -5px;
-
-  /* position: relative; */
-  width: 338px;
+  position: relative;
+  width: 308px;
 }
 
 .button_search {
