@@ -21,6 +21,7 @@ export default function DrinkRecipe() {
       setLoading(true);
       if (id) {
         const data = await fetchDrinksDetails(id);
+
         if (data) setRecipe(data[0]);
       }
       setLoading(false);

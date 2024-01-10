@@ -11,6 +11,7 @@ import mealCategory from '../../images/iconMealCategory.svg';
 import drinkCategory from '../../images/iconDrinkCategory.svg';
 import ShowShareAlert from '../ShowShareAlert';
 import Ingredients from '../Ingredients';
+import CarouselRecommendation from '../CarouselRecommendation';
 
 // const INITIAL_STATE: RecipeType = {
 //   id: '',
@@ -89,13 +90,18 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
       />
       <div className={ styles.instructions_card }>
         <h2>Instructions</h2>
-        <p
+        <div
+          className="instructions"
           data-testid="instructions"
-          className={ styles.instructions }
         >
-          { recipe.instructions }
+          { recipe.instructions
+          && recipe.instructions.split('\r\n').map((text, index) => (
+            <p key={ index }>
+              {text}
+            </p>
+          ))}
+        </div>
 
-        </p>
       </div>
       {
         recipe.video && (
@@ -103,7 +109,7 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
             <h2>Video</h2>
             <iframe
               title="Recipe Video"
-              width="560"
+              width="340"
               height="315"
               src={ recipe.video.replace('watch?v=', 'embed/') }
               data-testid="video"
@@ -113,6 +119,7 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
 
         )
       }
+      <CarouselRecommendation path={ path } />
     </>
   );
 }
