@@ -10,6 +10,7 @@ import styles from './RecipeDetails.module.css';
 import mealCategory from '../../images/iconMealCategory.svg';
 import drinkCategory from '../../images/iconDrinkCategory.svg';
 import ShowShareAlert from '../ShowShareAlert';
+import Ingredients from '../Ingredients';
 
 // const INITIAL_STATE: RecipeType = {
 //   id: '',
@@ -26,7 +27,7 @@ type RecipeDetailsProps = {
 };
 
 export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
-  const { setRecipesInProgress, handleIdLink } = useContext(RecipesContext);
+  const { handleIdLink } = useContext(RecipesContext);
 
   const path = window.location.pathname.split('/')[1];
 
@@ -82,6 +83,36 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
         </div>
       </div>
       <ShowShareAlert />
+      <Ingredients
+        inProgress={ isInProgress }
+        ingredients={ recipe.ingredients || [] }
+      />
+      <div className={ styles.instructions_card }>
+        <h2>Instructions</h2>
+        <p
+          data-testid="instructions"
+          className={ styles.instructions }
+        >
+          { recipe.instructions }
+
+        </p>
+      </div>
+      {
+        recipe.video && (
+          <div className={ styles.video_card }>
+            <h2>Video</h2>
+            <iframe
+              title="Recipe Video"
+              width="560"
+              height="315"
+              src={ recipe.video.replace('watch?v=', 'embed/') }
+              data-testid="video"
+              allowFullScreen
+            />
+          </div>
+
+        )
+      }
     </>
   );
 }

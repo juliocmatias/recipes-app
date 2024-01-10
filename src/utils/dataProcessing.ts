@@ -15,6 +15,7 @@ interface NewRecipe {
   tags: string[];
   instructions: string;
   ingredients: string[];
+  video?: string;
 }
 
 const formatIngredients = (drink: DrinksType[0] | MealsType[0]): string[] => {
@@ -66,6 +67,7 @@ const transformMeal = (meal: MealsType[0]): NewRecipe => {
     tags: meal.strTags ? meal.strTags.split(',') : [],
     instructions: meal.strInstructions || '',
     ingredients: formatIngredients(meal),
+    video: meal.strYoutube || '',
   };
 };
 

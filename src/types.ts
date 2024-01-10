@@ -45,6 +45,7 @@ export type RecipeType = {
   tags?: string[];
   instructions?: string;
   ingredients?: string[]
+  video?: string;
 };
 
 export type RecipesType = RecipeType[];
