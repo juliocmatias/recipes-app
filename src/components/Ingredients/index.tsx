@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import RecipesContext from '../../context/RecipesContext';
+import { putLocalStorage } from '../../utils/locaStorage';
 
 type IngredientsProps = {
   ingredients: string[];
@@ -32,8 +33,45 @@ export default function Ingredients({ ingredients, inProgress }: IngredientsProp
     const pathName = window.location.pathname.split('/')[1];
     const id = window.location.pathname.split('/')[2];
     if (pathName === 'meals' || pathName === 'drinks') {
-      const verifyIdInProgress = recipesInProgress[pathName][id];
-      const verifyIngredient = verifyIdInProgress?.filter((item) => item !== ingredient);
+      // const verifyIdInProgress = recipesInProgress[pathName][id];
+      // const verifyIngredient = verifyIdInProgress.includes(ingredient);
+      if (!recipesInProgress[pathName][id]) {
+        console.log('entrou');
+
+        setRecipesInProgress({
+          ...recipesInProgress,
+          [pathName]: {
+            ...recipesInProgress[pathName],
+            [id]: [ingredient],
+          },
+        });
+        putLocalStorage('inProgressRecipes', recipesInProgress);
+      } else {
+        console.log('entrou no else');
+        // verifica se o ingrediente já está no array
+        // se estiver, remove
+        // se não estiver, adiciona
+        const verifyIngredient = recipesInProgress[pathName][id].includes(ingredient);
+        if (verifyIngredient) {
+          const newIngredients = recipesInProgress[pathName][id]
+            .filter((item) => item !== ingredient);
+          setRecipesInProgress({
+            ...recipesInProgress,
+            [pathName]: {
+              ...recipesInProgress[pathName],
+              [id]: newIngredients,
+            },
+          });
+        } else {
+          setRecipesInProgress({
+            ...recipesInProgress,
+            [pathName]: {
+              ...recipesInProgress[pathName],
+              [id]: [...recipesInProgress[pathName][id], ingredient],
+            },
+          });
+        }
+      }
     }
   };
   // console.log(ingredients);
