@@ -53,6 +53,8 @@ type RecipesContextType = {
   setIsDone: React.Dispatch<React.SetStateAction<boolean>>
   isInProgress: boolean,
   setIsInProgress: React.Dispatch<React.SetStateAction<boolean>>
+  ingredientsChecked: string[],
+  setIngredientsChecked: React.Dispatch<React.SetStateAction<string[]>>
 };
 
 const RecipesContext = createContext({} as RecipesContextType);

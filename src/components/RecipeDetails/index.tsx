@@ -35,7 +35,7 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
   const pathPage = window.location.pathname;
 
   const {
-    isDone, isFavorite, isInProgress } = useRecipeDetails(recipe);
+    isFavorite, isInProgress } = useRecipeDetails(recipe);
 
   return (
     <>
@@ -87,7 +87,6 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
       </div>
       <ShowShareAlert />
       <Ingredients
-        inProgress={ isInProgress }
         ingredients={ recipe.ingredients || [] }
       />
       <div className={ styles.instructions_card }>
@@ -124,9 +123,10 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
       }
       <CarouselRecommendation path={ path } />
       <ButtonRecipe
+        recipe={ recipe }
         id={ recipe.id }
         path={ path }
-        isDone={ isDone }
+        isProgress={ isInProgress }
         dataTestId={ pathPage.includes('in-progress') ? 'finish' : 'start' }
       />
     </>

@@ -8,10 +8,18 @@
   font-size: 16pt;
   font-weight: 600;
   left: 50%;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   padding: 5px;
   position: fixed;
   text-transform: uppercase;
   transform: translateX(-50%);
   width: fit-content;
+}
+
+.recipe_btn:disabled {
+  background-color: #4e4e4e; /* Substitua pela cor desejada para o botão desabilitado */
+  cursor: not-allowed;
+
+
+  /* Adicione outras propriedades de estilo conforme necessário */
 }

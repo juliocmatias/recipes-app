@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import RecipesContext from '../../context/RecipesContext';
-import { putLocalStorage } from '../../utils/locaStorage';
+import {
+  getLocalStorage, putLocalStorage } from '../../utils/locaStorage';
 
 type IngredientsProps = {
   ingredients: string[];
-  inProgress: boolean;
 };
 // esse componente recebe um array de ingredientes e o pathname da pagina atual
 // caso o pathname seja '/meals/id', renderize os ingredientes de comida como lista
@@ -12,82 +12,83 @@ type IngredientsProps = {
 // caso o pathname seja '/drinks/id', renderize os ingredientes de bebida como lista
 // caso o pathname seja '/drinks/id/in-progress', renderize os ingredientes de bebida com checkbox
 
-export default function Ingredients({ ingredients, inProgress }: IngredientsProps) {
+export default function Ingredients({ ingredients }: IngredientsProps) {
   const [pageInProgress, setPageInProgress] = useState(false);
-  const { recipesInProgress, setRecipesInProgress } = useContext(RecipesContext);
-  const [ingredientsChecked, setIngredientsChecked] = useState([]);
+  const { ingredientsChecked, setIngredientsChecked,
+    setRecipesInProgress, setIsInProgress } = useContext(RecipesContext);
+  // const [ingredientsChecked, setIngredientsChecked] = useState([] as string[]);
 
   const path = window.location.pathname;
+  const id = path.split('/')[2];
+  const pathName = path.split('/')[1] as 'meals' | 'drinks';
 
   useEffect(() => {
     setPageInProgress(path.includes('in-progress'));
     const verifyRecipeInProgress = () => {
+      const inProgressRecipes = getLocalStorage('inProgressRecipes');
+      if (inProgressRecipes) {
+        setRecipesInProgress(inProgressRecipes);
+
+        // Verificar se 'inProgressRecipes[pathName]' e 'inProgressRecipes[pathName][id]' estão definidos
+        if (inProgressRecipes[pathName] && inProgressRecipes[pathName][id]) {
+          setIngredientsChecked(inProgressRecipes[pathName][id]);
+          setIsInProgress(true);
+        }
+      }
     };
+
     verifyRecipeInProgress();
-  }, [path]);
+  }, [id, path, pathName, setIngredientsChecked, setIsInProgress, setRecipesInProgress]);
 
   // console.log(ingredients);
   // console.log(pageInProgress);
   // console.log(recipesInProgress);
-  const handleRecipeInProgress = (ingredient: string) => {
-    const pathName = window.location.pathname.split('/')[1];
-    const id = window.location.pathname.split('/')[2];
-    if (pathName === 'meals' || pathName === 'drinks') {
-      // const verifyIdInProgress = recipesInProgress[pathName][id];
-      // const verifyIngredient = verifyIdInProgress.includes(ingredient);
-      if (!recipesInProgress[pathName][id]) {
-        console.log('entrou');
-
-        setRecipesInProgress({
-          ...recipesInProgress,
+  const handleRecipeInProgress = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = event.target.checked;
+    const { name } = event.target;
+    // console.log(isChecked);
+    // console.log(name);
+    if (isChecked) {
+      setIngredientsChecked((prevChecked) => [...prevChecked, name]);
+      setRecipesInProgress((prev) => {
+        const newInProgress = {
+          ...prev,
           [pathName]: {
-            ...recipesInProgress[pathName],
-            [id]: [ingredient],
+            ...prev[pathName],
+            [id]: [...(prev[pathName][id] || []), name],
           },
-        });
-        putLocalStorage('inProgressRecipes', recipesInProgress);
-      } else {
-        console.log('entrou no else');
-        // verifica se o ingrediente já está no array
-        // se estiver, remove
-        // se não estiver, adiciona
-        const verifyIngredient = recipesInProgress[pathName][id].includes(ingredient);
-        if (verifyIngredient) {
-          const newIngredients = recipesInProgress[pathName][id]
-            .filter((item) => item !== ingredient);
-          setRecipesInProgress({
-            ...recipesInProgress,
-            [pathName]: {
-              ...recipesInProgress[pathName],
-              [id]: newIngredients,
-            },
-          });
-        } else {
-          setRecipesInProgress({
-            ...recipesInProgress,
-            [pathName]: {
-              ...recipesInProgress[pathName],
-              [id]: [...recipesInProgress[pathName][id], ingredient],
-            },
-          });
+        };
+        putLocalStorage('inProgressRecipes', newInProgress);
+        return newInProgress;
+      });
+      setIsInProgress(true);
+    } else {
+      setIngredientsChecked((prevChecked) => prevChecked.filter((item) => item !== name));
+      setRecipesInProgress((prev) => {
+        const updatedIngredients = prev[pathName][id].filter((item) => item !== name);
+
+        const newInProgress = {
+          ...prev,
+          [pathName]: {
+            ...prev[pathName],
+            [id]: updatedIngredients,
+          },
+        };
+
+        // Verifica se o array de ingredientes é vazio e remove o ID correspondente
+        if (updatedIngredients.length === 0) {
+          delete newInProgress[pathName][id];
+          setIsInProgress(false);
         }
-      }
+
+        putLocalStorage('inProgressRecipes', newInProgress);
+        return newInProgress;
+      });
+
+      setIsInProgress(true);
     }
   };
   // console.log(ingredients);
-  const verifyChecked = (ingredient: string) => {
-    const pathName = window.location.pathname.split('/')[1];
-    const id = window.location.pathname.split('/')[2];
-    if (pathName === 'meals' || pathName === 'drinks') {
-      if (recipesInProgress[pathName][id]) {
-        const verifyIngredient = recipesInProgress[pathName][id].includes(ingredient);
-        if (verifyIngredient) {
-          return true;
-        }
-      }
-      return false;
-    }
-  };
 
   return (
     <div className="ingredients_Card">
@@ -97,13 +98,15 @@ export default function Ingredients({ ingredients, inProgress }: IngredientsProp
           htmlFor={ ingredient }
           key={ index }
           data-testid={ `${index}-ingredient-step` }
+          style={ { textDecoration: ingredientsChecked
+            .includes(ingredient) ? 'line-through' : 'none' } }
         >
           <input
             type="checkbox"
             id={ ingredient }
             name={ ingredient }
-            onClick={ () => handleRecipeInProgress(ingredient) }
-            checked={ verifyChecked(ingredient) }
+            checked={ ingredientsChecked.includes(ingredient) }
+            onChange={ handleRecipeInProgress }
           />
           { ingredient }
         </label>

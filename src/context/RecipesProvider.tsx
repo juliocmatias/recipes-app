@@ -31,6 +31,7 @@ export default function RecipesProvider({ children }: UserProviderProps) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const [isInProgress, setIsInProgress] = useState(false);
+  const [ingredientsChecked, setIngredientsChecked] = useState([] as string[]);
 
   const handleIdLink = (idLink: string, typeLink: string) => {
     setIdLinkAlert({
@@ -71,6 +72,8 @@ export default function RecipesProvider({ children }: UserProviderProps) {
     setIsDone,
     isInProgress,
     setIsInProgress,
+    ingredientsChecked,
+    setIngredientsChecked,
   };
   return (
     <UserContext.Provider value={ context }>
