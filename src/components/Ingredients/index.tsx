@@ -75,6 +75,19 @@ export default function Ingredients({ ingredients, inProgress }: IngredientsProp
     }
   };
   // console.log(ingredients);
+  const verifyChecked = (ingredient: string) => {
+    const pathName = window.location.pathname.split('/')[1];
+    const id = window.location.pathname.split('/')[2];
+    if (pathName === 'meals' || pathName === 'drinks') {
+      if (recipesInProgress[pathName][id]) {
+        const verifyIngredient = recipesInProgress[pathName][id].includes(ingredient);
+        if (verifyIngredient) {
+          return true;
+        }
+      }
+      return false;
+    }
+  };
 
   return (
     <div className="ingredients_Card">
@@ -90,6 +103,7 @@ export default function Ingredients({ ingredients, inProgress }: IngredientsProp
             id={ ingredient }
             name={ ingredient }
             onClick={ () => handleRecipeInProgress(ingredient) }
+            checked={ verifyChecked(ingredient) }
           />
           { ingredient }
         </label>
