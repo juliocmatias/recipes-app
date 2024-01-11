@@ -32,15 +32,8 @@ export default function Ingredients({ ingredients, inProgress }: IngredientsProp
     const pathName = window.location.pathname.split('/')[1];
     const id = window.location.pathname.split('/')[2];
     if (pathName === 'meals' || pathName === 'drinks') {
-      const verifyId = recipesInProgress[pathName][id];
-      const verifyIngredient = verifyId?.filter((item) => item !== ingredient);
-      setRecipesInProgress((prevState) => ({
-        ...prevState,
-        [pathName]: {
-          ...prevState[pathName],
-          [id]: verifyId ? [...verifyIngredient, ingredient] : [ingredient],
-        },
-      }));
+      const verifyIdInProgress = recipesInProgress[pathName][id];
+      const verifyIngredient = verifyIdInProgress?.filter((item) => item !== ingredient);
     }
   };
   // console.log(ingredients);
