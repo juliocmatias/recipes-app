@@ -93,26 +93,26 @@ export const deleteLocalStorage = (key: KeyLocalStorageType, id?: string) => {
         .filter((recipe: RecipeLocalStorageType) => recipe.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
       break; }
-    // case 'inProgressRecipes': {
-    //   const inProgressRecipes: InProgressRecipesType = JSON.parse(localStorage
-    //     .getItem('inProgressRecipes') || '{}');
-    //   const newInProgressRecipes = Object.keys(inProgressRecipes)
-    //     .reduce((
-    //       acc: InProgressRecipesType,
-    //       recipeId: string,
-    //     ) => {
-    //       if (recipeId !== id) {
-    //         return { ...acc,
-    //           [recipeId]:
-    //           inProgressRecipes[recipeId as keyof InProgressRecipesType] };
-    //       }
-    //       return acc;
-    //     }, { meals: {}, drinks: {} });
-    //   console.log(newInProgressRecipes);
+    case 'inProgressRecipes': {
+      const inProgressRecipes: InProgressRecipesType = JSON.parse(localStorage
+        .getItem('inProgressRecipes') || '{}');
+      const newInProgressRecipes = Object.keys(inProgressRecipes)
+        .reduce((
+          acc: InProgressRecipesType,
+          recipeId: string,
+        ) => {
+          if (recipeId !== id) {
+            return { ...acc,
+              [recipeId]:
+              inProgressRecipes[recipeId as keyof InProgressRecipesType] };
+          }
+          return acc;
+        }, { meals: {}, drinks: {} });
+      console.log(newInProgressRecipes);
 
-    //   // localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressRecipes));
-    //   break;
-    // }
+      // localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressRecipes));
+      break;
+    }
     default:
       localStorage.clear();
   }

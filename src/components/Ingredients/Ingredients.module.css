@@ -1,0 +1,58 @@
+.ingredientsTitle {
+  font-family: Epilogue-Regular , Helvetica , Arial , sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0 1rem 1rem;
+  margin-top: 1rem;
+}
+
+.list {
+  background-color: white;
+  border: 0.55px solid;
+  border-color: #b1b1b1;
+  border-radius: 5.35px;
+  list-style: circle;
+  margin: 0 13px;
+  padding: 2em;
+}
+
+.listItem {
+  color: #1a1b1c;
+  font-family: Epilogue-Regular , Helvetica , Arial , sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.checkbox {
+  background-color: white;
+  border: 0.55px solid;
+  border-color: #b1b1b1;
+  border-radius: 5.35px;
+  display: flex;
+  flex-direction: column;
+  font-family: Epilogue-Regular , Helvetica , Arial , sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0 13px;
+  padding: 1em;
+}
+
+.checkbox label {
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  user-select: none;
+}
+
+.checkbox label input {
+  accent-color: #19a48d;
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import RecipesContext from '../../context/RecipesContext';
 import {
   getLocalStorage, putLocalStorage } from '../../utils/locaStorage';
+import styles from './Ingredients.module.css';
 
 type IngredientsProps = {
   ingredients: string[];
@@ -15,7 +16,7 @@ type IngredientsProps = {
 export default function Ingredients({ ingredients }: IngredientsProps) {
   const [pageInProgress, setPageInProgress] = useState(false);
   const { ingredientsChecked, setIngredientsChecked,
-    setRecipesInProgress, setIsInProgress } = useContext(RecipesContext);
+    setRecipesInProgress, setIsInProgress, setIsDone } = useContext(RecipesContext);
   // const [ingredientsChecked, setIngredientsChecked] = useState([] as string[]);
 
   const path = window.location.pathname;
@@ -38,7 +39,8 @@ export default function Ingredients({ ingredients }: IngredientsProps) {
     };
 
     verifyRecipeInProgress();
-  }, [id, path, pathName, setIngredientsChecked, setIsInProgress, setRecipesInProgress]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, path, pathName, setIngredientsChecked, setIsInProgress, setIsDone]);
 
   // console.log(ingredients);
   // console.log(pageInProgress);
@@ -91,37 +93,46 @@ export default function Ingredients({ ingredients }: IngredientsProps) {
   // console.log(ingredients);
 
   return (
-    <div className="ingredients_Card">
-      <h2>Ingredients</h2>
-      { pageInProgress ? ingredients.map((ingredient, index) => (
-        <label
-          htmlFor={ ingredient }
-          key={ index }
-          data-testid={ `${index}-ingredient-step` }
-          style={ { textDecoration: ingredientsChecked
-            .includes(ingredient) ? 'line-through' : 'none' } }
-        >
-          <input
-            type="checkbox"
-            id={ ingredient }
-            name={ ingredient }
-            checked={ ingredientsChecked.includes(ingredient) }
-            onChange={ handleRecipeInProgress }
-          />
-          { ingredient }
-        </label>
-      )) : (
-        <ul>
-          { ingredients.map((ingredient, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              { ingredient }
+    <div>
+      <h2 className={ styles.ingredientsTitle }>Ingredients</h2>
+      { pageInProgress ? (
+        <div className={ styles.checkbox }>
+          {
+            ingredients.map((ingredient, index) => (
+              <label
+                htmlFor={ ingredient }
+                key={ index }
+                data-testid={ `${index}-ingredient-step` }
+                style={ { textDecoration: ingredientsChecked
+                  .includes(ingredient) ? 'line-through' : 'none' } }
+              >
+                <input
+                  type="checkbox"
+                  id={ ingredient }
+                  name={ ingredient }
+                  checked={ ingredientsChecked.includes(ingredient) }
+                  onChange={ handleRecipeInProgress }
+                />
+                { ingredient }
+              </label>
+            ))
 
-            </li>
-          )) }
-        </ul>) }
+          }
+        </div>
+      )
+        : (
+          <ul className={ styles.list }>
+            { ingredients.map((ingredient, index) => (
+              <li
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                className={ styles.listItem }
+              >
+                { ingredient }
+
+              </li>
+            )) }
+          </ul>) }
 
     </div>
   );

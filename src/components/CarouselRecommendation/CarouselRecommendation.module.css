@@ -31,6 +31,16 @@
 
 }
 
+.recommended_title {
+  font-family: Epilogue-Bold , Helvetica , Arial , sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0 1rem 1rem;
+  margin-top: 1rem;
+}
+
 .name_recipe {
   font-size: 14px;
   margin-left: 16px;

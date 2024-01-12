@@ -47,6 +47,7 @@ const useRecipeDetails = (recipeDetails:RecipeType) => {
 
     updateLocalStorageStates();
     checkRecipeStorage();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     setDoneRecipes, setFavorites,
     setIsDone, setIsFavorite, setIsInProgress, setRecipesInProgress]);

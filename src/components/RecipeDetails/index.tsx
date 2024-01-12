@@ -13,16 +13,7 @@ import ShowShareAlert from '../ShowShareAlert';
 import Ingredients from '../Ingredients';
 import CarouselRecommendation from '../CarouselRecommendation';
 import ButtonRecipe from '../ButtonRecipe';
-
-// const INITIAL_STATE: RecipeType = {
-//   id: '',
-//   type: 'meal',
-//   nationality: '',
-//   category: '',
-//   alcoholicOrNot: '',
-//   name: '',
-//   image: '',
-// };
+import ButtonNavigate from '../ButtonNavigate';
 
 type RecipeDetailsProps = {
   recipe: RecipeType;
@@ -34,7 +25,7 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
   const path = window.location.pathname.split('/')[1];
   const pathPage = window.location.pathname;
 
-  const {
+  const { isDone,
     isFavorite, isInProgress } = useRecipeDetails(recipe);
 
   return (
@@ -85,14 +76,15 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
           />
         </div>
       </div>
+      <ButtonNavigate />
       <ShowShareAlert />
       <Ingredients
         ingredients={ recipe.ingredients || [] }
       />
-      <div className={ styles.instructions_card }>
-        <h2>Instructions</h2>
+      <div>
+        <h2 className={ styles.instructionsTile }>Instructions</h2>
         <div
-          className="instructions"
+          className={ styles.instructions }
           data-testid="instructions"
         >
           { recipe.instructions
@@ -107,10 +99,10 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
       {
         recipe.video && (
           <div className={ styles.video_card }>
-            <h2>Video</h2>
+            <h2 className={ styles.videoTitle }>Video</h2>
             <iframe
               title="Recipe Video"
-              width="340"
+              width="640"
               height="315"
               className={ styles.video }
               src={ recipe.video.replace('watch?v=', 'embed/') }
@@ -126,6 +118,7 @@ export default function RecipeDetails({ recipe }: RecipeDetailsProps) {
         recipe={ recipe }
         id={ recipe.id }
         path={ path }
+        isDone={ isDone }
         isProgress={ isInProgress }
         dataTestId={ pathPage.includes('in-progress') ? 'finish' : 'start' }
       />

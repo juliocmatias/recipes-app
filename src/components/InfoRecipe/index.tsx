@@ -73,17 +73,19 @@ export default function InfoRecipe({
                 {`Done in: ${convertDate(recipe.doneDate as string)}`}
               </span>
             </div>
-            <div className={ styles.done_tag_card }>
-              {recipe.tags?.length && recipe.tags.map((tag) => (
-                <span
-                  key={ tag }
-                  className={ styles.done_tags }
-                  data-testid={ `${index}-${tag}-horizontal-tag` }
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            { recipe.tags && recipe.tags?.length > 0 && (
+              <div className={ styles.done_tag_card }>
+                {recipe.tags?.length && recipe.tags.map((tag) => (
+                  <span
+                    key={ tag }
+                    className={ styles.done_tags }
+                    data-testid={ `${index}-${tag}-horizontal-tag` }
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>

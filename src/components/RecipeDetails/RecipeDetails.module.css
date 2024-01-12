@@ -59,6 +59,43 @@
   z-index: 1; /* Coloca o botão na frente da imagem */
 }
 
+.instructionsTile {
+  font-family: Epilogue-Regular , Helvetica , Arial , sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0 1rem 1rem;
+  margin-top: 1rem;
+}
+
+.instructions {
+  background-color: white;
+  border: 0.55px solid;
+  border-color: #b1b1b1;
+  border-radius: 5.35px;
+  color: #1a1b1c;
+  font-family: Epilogue-Regular , Helvetica , Arial , sans-serif;
+  font-size: 14px;
+  list-style: circle;
+  margin: 0 13px;
+  padding: 1em;
+}
+
+.videoTitle {
+  font-family: Epilogue-Regular , Helvetica , Arial , sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0 1rem 1rem;
+  margin-top: 1rem;
+}
+
+.video {
+  margin: 0 1rem 1rem;
+}
+
 @media ( max-width : 250px ) {
 
   .category_card {
@@ -71,6 +108,21 @@
     right: 0;
     top: 50px;
     transform: translateX(-50%);
+  }
+}
+
+@media ( max-width : 600px ) {
+
+  .video {
+    width: 500px;
+  }
+}
+
+@media ( max-width : 400px ) {
+
+  .video {
+    height: 205px;
+    width: 305px;
   }
 }
 

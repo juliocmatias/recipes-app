@@ -28,6 +28,8 @@ export default function FilterRecipesStorage() {
       case 'Meals Filter Icon':
         if (pathName === '/favorite-recipes') {
           const filterMeals = favorites.filter((item) => item.type === 'meal');
+          console.log(filterMeals);
+
           setFilterRecipesStorage(filterMeals);
         } else if (pathName === '/done-recipes') {
           const filterMeals = doneRecipes.filter((item) => item.type === 'meal');

@@ -1,0 +1,27 @@
+.container {
+  align-items: center;
+  background-color: #19a48d;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 2px;
+  padding-top: 2px;
+}
+
+.back {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.drinks {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.meals {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
