@@ -27,16 +27,16 @@ export default function InfoRecipe({
 
   const verifyPath = path === 'done-recipes';
 
-  const convertDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+  // const convertDate = (dateString: string) => {
+  //   const date = new Date(dateString);
+  //   const day = date.getDate();
+  //   const month = date.getMonth() + 1;
+  //   const year = date.getFullYear();
 
-    const dataFormatted = `${day < 10 ? `0${day}`
-      : day}/${month < 10 ? `0${month}` : month}/${year}`;
-    return dataFormatted;
-  };
+  //   const dataFormatted = `${day < 10 ? `0${day}`
+  //     : day}/${month < 10 ? `0${month}` : month}/${year}`;
+  //   return dataFormatted;
+  // };
 
   return (
     <div className={ classInfoRecipe }>
@@ -70,7 +70,7 @@ export default function InfoRecipe({
           <div className={ styles.done_info }>
             <div className={ styles.done_date }>
               <span data-testid={ `${index}-horizontal-done-date` }>
-                {`Done in: ${convertDate(recipe.doneDate as string)}`}
+                {`Done in: ${recipe.doneDate as string}`}
               </span>
             </div>
             { recipe.tags && recipe.tags?.length > 0 && (
