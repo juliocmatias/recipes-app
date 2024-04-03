@@ -45,6 +45,7 @@ export const putLocalStorage = (
       localStorage
         .setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes, value]));
       break; }
+
     case 'inProgressRecipes': {
       const valueInProgress = value as InProgressRecipesType;
       const inProgressRecipes = JSON

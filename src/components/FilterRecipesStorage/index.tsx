@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // esse componente renderizará os botões para filtrar as receitas;
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import ALLRecipes from '../../images/filtros/storage/allRecipes.svg';
 import Foots from '../../images/filtros/storage/foods.svg';
 import Drinks from '../../images/filtros/storage/drinks.svg';
@@ -14,6 +15,13 @@ import RecipesContext from '../../context/RecipesContext';
 
 export default function FilterRecipesStorage() {
   const { favorites, doneRecipes, setFilterRecipesStorage } = useContext(RecipesContext);
+
+  useEffect(() => {
+    const filterRecipeDefault = () => {
+      setFilterRecipesStorage([]);
+    };
+    filterRecipeDefault();
+  }, []);
 
   // pegar o pathName para saber qual pagina está sendo renderizada
   const pathName = window.location.pathname;
