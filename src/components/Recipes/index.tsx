@@ -27,7 +27,7 @@ export default function Recipes() {
     };
     getRecipes();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path, setRecipes, filterRecipesCategory]);
+  }, [path, setRecipes]);
   return (
     <>
       {loading && <Loading />}
