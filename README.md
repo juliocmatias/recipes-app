@@ -78,6 +78,18 @@ using this command application will open in the browser.
 
   </details>
 
+  ### Testing Integration Using RTL
+
+  <details>
+    <summary><strong>See about</strong></summary>
+
+  The application has test coverage, to see it, just run the command in the terminal:
+  `npm run test`
+
+  ![Tests](./public/images/Tests.png)
+
+  </details>
+
   <div style="display: inline_block">
   <img align="center" alt="julio-ts" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" title="TypeScript">
   <img align="center" alt="julio-node" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" title="NodeJs">
