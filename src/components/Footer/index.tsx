@@ -6,7 +6,7 @@ import styles from './Footer.module.css';
 import RecipesContext from '../../context/RecipesContext';
 
 function Footer() {
-  const { setRecipes, setFilterRecipesCategory } = useContext(RecipesContext);
+  const { setFilterRecipesCategory } = useContext(RecipesContext);
   const navigate = useNavigate();
 
   return (
@@ -21,7 +21,6 @@ function Footer() {
       <button
         onClick={ () => {
           navigate('/drinks');
-          setRecipes([]);
           setFilterRecipesCategory([]);
         } }
       >
@@ -34,7 +33,6 @@ function Footer() {
       <button
         onClick={ () => {
           navigate('/meals');
-          setRecipes([]);
           setFilterRecipesCategory([]);
         } }
       >
