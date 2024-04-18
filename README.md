@@ -72,7 +72,7 @@ using this command application will open in the browser.
   <details>
     <summary><strong>See about</strong></summary>
 
-  We used the Kanban Trello to better organize the tasks that each person would perform, this gave us an idea of what a real sprint would be like in the work environment.
+  We used Kanban Trello as an agile methodology to better organize the tasks that each person would perform, this gave us an idea of what a real sprint would be like in the workplace.
 
   ![Trello](./public/images/Trello.png)
 
@@ -83,7 +83,7 @@ using this command application will open in the browser.
   <details>
     <summary><strong>See about</strong></summary>
 
-  The application has test coverage, to see it, just run the command in the terminal:
+  The application has integration test coverage, using Vitest with RTL. To see it, simply execute the command in the terminal:
   `npm run test`
 
   ![Tests](./public/images/Tests.png)
@@ -95,7 +95,9 @@ using this command application will open in the browser.
   <img align="center" alt="julio-node" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" title="NodeJs">
   <img align="center" alt="julio-react" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" title="React">
   <img align="center" alt="julio-HTML" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" title="HTML">
-  <img align="center" alt="julio-CSS" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" title="CSS">  
+  <img align="center" alt="julio-CSS" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" title="CSS">
+  <img align="center" alt="julio-Vitest" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vitest/vitest-original.svg" title="Vitest">
+    <img align="center" alt="julio-Git" height="40" width="50" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/git/git-original.svg" title="Git">
 </div>
 
 </details>
