@@ -15,8 +15,13 @@ const buttonBeef = 'Beef-category-filter';
 const buttonShake = 'Shake-category-filter';
 
 describe('17 - Verifica se quando o retorno da api para recomendados det null apresenta console de erro.', () => {
+  beforeEach(() => {
+    console.error = vi.fn();
+    console.error = vi.fn().mockImplementation(() => {});
+  });
   afterEach(() => {
     vi.spyOn(global, 'fetch').mockRestore();
+    vi.fn().mockRestore();
   });
   it('Verifica se na pagina de /meals aparece o console de erro', async () => {
     vi.spyOn(global, 'fetch').mockResolvedValue({
@@ -56,6 +61,14 @@ describe('17 - Verifica se quando o retorno da api para recomendados det null ap
 });
 
 describe('18 - Verifica se quando clicado em uma categoria de filtro tem o retorno da api corretamente', () => {
+  beforeEach(() => {
+    vi.spyOn(window, 'fetch').mockImplementation(fetchMock as any);
+    console.error = vi.fn().mockImplementation(() => {});
+  });
+  afterEach(() => {
+    vi.spyOn(global, 'fetch').mockRestore();
+    vi.fn().mockRestore();
+  });
   const checkFirstTwelveRecipes = (recipes: any, meal = true) => {
     const recipeType = meal ? 'Meal' : 'Drink';
     recipes.slice(0, 12).forEach((recipe: any, index: number) => {
@@ -69,9 +82,6 @@ describe('18 - Verifica se quando clicado em uma categoria de filtro tem o retor
     expect(screen.queryByTestId('12-card-name')).not.toBeInTheDocument();
   };
 
-  beforeEach(() => {
-    vi.spyOn(window, 'fetch').mockImplementation(fetchMock as any);
-  });
   it('Verifica se na pagina de /meals tem apenas 12 retorno recipes quando clicado em filtro Beef', async () => {
     const { user } = renderWithRouter(
       <RecipesProvider>

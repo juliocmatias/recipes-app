@@ -15,6 +15,9 @@ const exeButtonID = 'exec-search-btn';
 const alertNotFound = "Sorry, we haven't found any recipes for these filters";
 
 describe('9 - Implemente os elementos da barra de busca respeitando os atributos descritos no protótipo', () => {
+  beforeEach(() => {
+    console.error = vi.fn();
+  });
   it('Tem os data-testids tanto da barra de busca quanto de todos os radio-buttons', async () => {
     const { user } = renderWithRouter(
       <RecipesProvider>
@@ -43,7 +46,8 @@ describe('9 - Implemente os elementos da barra de busca respeitando os atributos
 describe('10 - Implemente 3 radio buttons na barra de busca: Ingredient, Name e First letter', () => {
   beforeEach(() => {
     vi.spyOn(window, 'fetch').mockImplementation(fetchMock as any);
-    vi.spyOn(window, 'alert');
+    vi.spyOn(global, 'alert');
+    console.error = vi.fn();
   });
   it('Se o radio selecionado for Ingredient, a busca na API é feita corretamente pelo ingrediente', async () => {
     const { user } = renderWithRouter(
@@ -143,6 +147,7 @@ describe('11 - Busque na API de comidas caso a pessoa esteja na página de comid
   beforeEach(() => {
     vi.spyOn(window, 'fetch').mockImplementation(fetchMock as any);
     vi.spyOn(window, 'alert');
+    console.error = vi.fn();
   });
   it('Na tela de bebidas, se o radio selecionado for Ingredient, a busca na API é feita corretamente pelo ingrediente', async () => {
     const { user } = renderWithRouter(
@@ -241,6 +246,7 @@ describe('11 - Busque na API de comidas caso a pessoa esteja na página de comid
 describe('12 - Redirecione para a tela de detalhes da receita caso apenas uma receita seja encontrada, com o ID da mesma na URL', () => {
   beforeEach(() => {
     vi.spyOn(window, 'fetch').mockImplementation(fetchMock as any);
+    console.error = vi.fn();
   });
   it('Caso apenas uma comida seja encontrada, deve-se ir para sua rota de detalhes', async () => {
     const { user } = renderWithRouter(
@@ -285,7 +291,8 @@ describe('12 - Redirecione para a tela de detalhes da receita caso apenas uma re
 describe('13 - Exiba um `alert` caso nenhuma receita seja encontrada', () => {
   beforeEach(() => {
     vi.spyOn(window, 'fetch').mockImplementation(fetchMock as any);
-    vi.spyOn(window, 'alert');
+    global.alert = vi.fn();
+    console.error = vi.fn();
   });
   it('Caso nenhuma comida seja encontrada o alert deve ser exibido', async () => {
     const { user } = renderWithRouter(
@@ -369,7 +376,8 @@ describe('13 - Exiba um `alert` caso nenhuma receita seja encontrada', () => {
 describe('14 - Exiba um `alert` caso mais nada seja digitado no input de busca', () => {
   beforeEach(() => {
     vi.spyOn(window, 'fetch').mockImplementation(fetchMock as any);
-    vi.spyOn(window, 'alert');
+    global.alert = vi.fn();
+    console.error = vi.fn();
   });
   it('Caso o input de busca esteja vazio o alert deve ser exibido', async () => {
     const { user } = renderWithRouter(
@@ -387,7 +395,7 @@ describe('14 - Exiba um `alert` caso mais nada seja digitado no input de busca',
     await act(async () => {
       await user.click(screen.getByTestId(exeButtonID));
     });
-    expect(window.alert).toBeCalled();
-    expect(window.alert).toHaveBeenCalledWith('Your search must contain only 1 (one) character');
+    expect(global.alert).toBeCalled();
+    expect(global.alert).toHaveBeenCalledWith('Your search must contain only 1 (one) character');
   });
 });
