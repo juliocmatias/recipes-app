@@ -39,7 +39,7 @@
 
 - copy the repository to a local folder using the terminal and passing the command:
   ```bash
-  git clone git@github.com:juliomatiastrybe/recipes-app.git
+  git clone git@github.com:juliocmatias/recipes-app.git
   ```
 
   If you don't have git installed, you can install it using this command in the shell and bash terminal:
